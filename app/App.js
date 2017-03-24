@@ -14,6 +14,8 @@ import ScrollableTabView,{DefaultTabBar} from 'react-native-scrollable-tab-view'
 
 import TabHome from './Views/TabHome'
 
+import Splash from  './Views/Splash'
+
 const store = configureStore();
 
 export default class App extends Component{
@@ -25,7 +27,7 @@ export default class App extends Component{
     render(){
         return(
 	        <Provider store={store}>
-		        <TabHome />
+		        <Splash style={styles.root} />
 	        </Provider>
 
         );
@@ -34,5 +36,6 @@ export default class App extends Component{
 
 const styles = StyleSheet.create({
     root : {
+    	flex:1
     }
 });
