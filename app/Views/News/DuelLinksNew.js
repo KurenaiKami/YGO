@@ -7,58 +7,52 @@ import {
 	Text,
 	Dimensions,
 	Image,
-	View
+	View,
+    ListView,
 } from 'react-native';
 
-import Swiper from 'react-native-swiper';
+import { fetchWechatNewsListByPage } from '../../actions/HomeAction'
 
 const {width} = Dimensions.get('window');
 
+import {connect} from 'react-redux'
 
-export default class DuelLinksNew extends Component
+const pageLimit = 10;
+
+class DuelLinksNew extends Component
 {
+
+	constructor(props)
+	{
+		super(props);
+		this.dataSource = new ListView.DataSource({rowHasChanged: (r1,r2) => r1 !== r2})
+	}
+
+	componentDidMount(){
+		this.props.dispatch(fetchWechatNewsListByPage(1,pageLimit));
+	}
+
 	render(){
+		const {news} = this.props;
 		return(
-			<Swiper style={styles.wrapper} height={60} >
-				<View style={styles.slide1}>
-					<Text style={styles.text}>Hello Swiper</Text>
-				</View>
-				<View style={styles.slide2}>
-					<Text style={styles.text}>Beautiful</Text>
-				</View>
-				<View style={styles.slide3}>
-					<Text style={styles.text}>And simple</Text>
-				</View>
-			</Swiper>
+			<Text>
+
+			</Text>
 
 		);
 	}
 }
 
+
+function mapStateToProps(state) {
+    const { news } = state;
+    return {
+        news,
+    }
+}
+export default connect(mapStateToProps)(DuelLinksNew);
+
 const styles = StyleSheet.create({
 	wrapper: {
-	},
-	slide1: {
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
-		backgroundColor: '#9DD6EB'
-	},
-	slide2: {
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
-		backgroundColor: '#97CAE5'
-	},
-	slide3: {
-		flex: 1,
-		justifyContent: 'center',
-		alignItems: 'center',
-		backgroundColor: '#92BBD9'
-	},
-	text: {
-		color: '#fff',
-		fontSize: 30,
-		fontWeight: 'bold'
 	}
 });

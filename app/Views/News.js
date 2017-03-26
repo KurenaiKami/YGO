@@ -10,27 +10,28 @@ import
 
 import ScrollableTabView,{DefaultTabBar}  from 'react-native-scrollable-tab-view';
 
-import Swiper from 'react-native-swiper';
+
+import { fetchWechatNewsListByPage } from '../actions/HomeAction'
 
 import DuelLinksNew from './News/DuelLinksNew'
+import { connect } from 'react-redux';
 
-export default class News extends Component
+class News extends Component
 {
 	render(){
+        const {news} = this.props;
 		return(
-
 			<ScrollableTabView
 				tabBarPosition= "top"
 				renderTabBar={ () =>  <DefaultTabBar   /> }
 				tabBarUnderlineStyle = {styles.underline}
 				tabBarTextStyle = {styles.tabText}
-
 			>
-				<View tabLabel = 'DuelLinks'>
 
-					<DuelLinksNew  />
-				</View>
-			<View tabLabel='OCG'>
+			<View tabLabel = '决斗链接'>
+				<DuelLinksNew navigator={this.props.navigator} route = {this.props.route}  />
+			</View>
+			<View tabLabel='游戏王OCG'>
 			</View>
 			<View tabLabel='视频'>
 			</View>
@@ -40,6 +41,15 @@ export default class News extends Component
 
 	}
 }
+
+
+function mapStateToProps(state) {
+    const { news } = state;
+    return {
+        news,
+    }
+}
+export default connect(mapStateToProps)(News);
 
 const styles = StyleSheet.create({
 	root:{

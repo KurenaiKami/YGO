@@ -12,9 +12,8 @@ import configureStore from './ConfigureStore';
 
 import ScrollableTabView,{DefaultTabBar} from 'react-native-scrollable-tab-view';
 
-import TabHome from './Views/TabHome'
+import NavigatorRoot from './Views/NavigatorRoot'
 
-import Splash from  './Views/Splash'
 
 const store = configureStore();
 
@@ -27,7 +26,7 @@ export default class App extends Component{
     render(){
         return(
 	        <Provider store={store}>
-		        <Splash style={styles.root} />
+                <NavigatorRoot />
 	        </Provider>
 
         );

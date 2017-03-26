@@ -10,6 +10,8 @@ import {
 
 import FeedAnimatedImage from '../Component/FeedAnimatedImage'
 
+import NavigatorRoute from '../Common/NavigatorRoute'
+
 const AD_SOURCE = [
 	'http://img.zcool.cn/community/018f5255f959116ac7251df8af2a4d.jpg',
 	'http://ec4.images-amazon.com/images/I/515BsYKPz0L._SY400_.jpg',
@@ -40,11 +42,14 @@ export default class Splash extends Component
 			if (this.state.adSecondsCount <= 1)
 			{
 				this.timer&& clearInterval(this.timer);
-
+                NavigatorRoute.replaceToMainScene(this.props.navigator);
 			}
-			this.setState({
-				adSecondsCount: --this.state.adSecondsCount
-			});
+			else
+			{
+                this.setState({
+                    adSecondsCount: --this.state.adSecondsCount
+                });
+			}
 		},1000)
 	}
 

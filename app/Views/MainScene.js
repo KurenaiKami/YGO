@@ -12,6 +12,8 @@ import {
 	Image
 } from 'react-native';
 
+import { connect } from 'react-redux';
+
 import TabNavigator from 'react-native-tab-navigator';
 
 import News from './News'
@@ -22,33 +24,33 @@ const Items = [
 		title: '资讯',
 		icon_n: require('../Resources/Images/news_normal.png'),
 		icon_s: require('../Resources/Images/news_sel.png'),
-		content: <News />
 	},
 	{
 		key: 'strategy',
 		title: '攻略',
 		icon_n: require('../Resources/Images/strategy_normal.png'),
 		icon_s: require('../Resources/Images/strategy_sel.png'),
-		content: <News />
 	},
 	{
 		key: 'cards',
 		title: '卡组',
 		icon_n: require('../Resources/Images/cards_normal.png'),
 		icon_s: require('../Resources/Images/cards_sel.png'),
-		content: <News />
 	},
 	{
 		key: 'around',
-		title: '周边',
+		title: '个人中心',
 		icon_n: require('../Resources/Images/shop_normal.png'),
 		icon_s: require('../Resources/Images/shop_sel.png'),
-		content: <News />
 	}
 ];
 
-export default class TabHome extends Component
+ class MainScene extends Component
 {
+    static propTypes = {
+        navigator: React.PropTypes.object.isRequired,
+        route: React.PropTypes.object.isRequired,
+    };
 
 	constructor(props)
 	{
@@ -56,6 +58,10 @@ export default class TabHome extends Component
 		this.state = {
 			selectedTab:'news'
 		};
+	}
+
+	componentDidMount(){
+		const {dispatch} = this.props;
 	}
 
 	renderItem(item,page)
@@ -70,13 +76,28 @@ export default class TabHome extends Component
 			    renderSelectedIcon = { () => <Image style={styles.icon}  source={item.icon_s} />  }
 				onPress = {() => this.setState( {selectedTab: item.key} ) }
 			>
-				{item.content}
+				{this._getComponent(item.key)}
 			</TabNavigator.Item>
 		);
 	}
 
+    _getComponent(key)
+	{
+		let Content ;
+		switch (key){
+			case 'news':
+				Content = <News navigator = {this.props.navigator} route = {this.props.route} />
+				break;
+			default:
+				Content = <View></View>
+		}
+
+		return Content;
+	}
+
 	render()
 	{
+        const {mainPage} = this.props;
 		let navItems = [];
 		navItems.push( Items.map( (item,page) => this.renderItem(item,page) ) );
 		return(
@@ -86,6 +107,14 @@ export default class TabHome extends Component
 		);
 	}
 }
+
+function mapStateToProps(state) {
+    const { mainPage } = state;
+    return {
+        mainPage,
+    }
+}
+export default connect(mapStateToProps)(MainScene);
 
 const styles = StyleSheet.create({
 	tab:{
@@ -97,7 +126,7 @@ const styles = StyleSheet.create({
 		color:'#979797'
 	},
 	tabSelText:{
-		color:'#3be2e2'
+		color:'#24e2af'
 	},
 	icon:{
 		width:30,
