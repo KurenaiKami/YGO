@@ -22,7 +22,7 @@ export default class AdCell extends Component
                     <Text style={styles.titleFont}>
                         {category.title}
                     </Text>
-                    <Image source={{uri: category.image_list[0] }}  style={styles.imageStyle} />
+                    <Image source={{uri: category.thumbnail_pic_s }}  style={styles.imageStyle} />
                 </View>
 
             </TouchableOpacity>

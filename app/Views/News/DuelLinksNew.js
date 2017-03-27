@@ -11,7 +11,9 @@ import {
     ListView,
 } from 'react-native';
 
-import { fetchWechatNewsListByPage } from '../../actions/HomeAction'
+import { fetchNewsListByPage } from '../../actions/HomeAction'
+
+import AdCell from '../../Component/cell/AdCell'
 
 const {width} = Dimensions.get('window');
 
@@ -29,25 +31,51 @@ class DuelLinksNew extends Component
 	}
 
 	componentDidMount(){
-		this.props.dispatch(fetchWechatNewsListByPage(1,pageLimit));
+		this.props.dispatch(fetchNewsListByPage(this.props.categoryKey));
 	}
 
 	render(){
-		const {news} = this.props;
-		return(
-			<Text>
+		const {onLineNews } = this.props;
+		if (onLineNews[this.props.categoryKey] )
+		{
+			if (onLineNews[this.props.categoryKey].state == 'pre_fetch')
+			{
+				return(
+					<View>
 
-			</Text>
+					</View>
+				);
+			}
 
-		);
+			let listData = onLineNews [this.props.categoryKey].newsList === undefined ? [] : onLineNews [this.props.categoryKey].newsList;
+			return(
+				<ListView
+					dataSource={this.dataSource.cloneWithRows(Array.from(listData) )}
+					renderRow={this._renderListItemView.bind(this)}
+				/>
+			);
+
+		}
+		else
+		{
+			return(
+				<View>
+				<Text>Loading</Text>
+			</View>);
+		}
+	}
+
+	_renderListItemView(data)
+	{
+		return <AdCell category= {data} />
 	}
 }
 
 
 function mapStateToProps(state) {
-    const { news } = state;
+    const { onLineNews  } = state;
     return {
-        news,
+	    onLineNews ,
     }
 }
 export default connect(mapStateToProps)(DuelLinksNew);

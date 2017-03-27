@@ -16,6 +16,11 @@ import { fetchWechatNewsListByPage } from '../actions/HomeAction'
 import DuelLinksNew from './News/DuelLinksNew'
 import { connect } from 'react-redux';
 
+const cates = [
+	{
+		key:'top'
+	}
+];
 class News extends Component
 {
 	render(){
@@ -29,7 +34,7 @@ class News extends Component
 			>
 
 			<View tabLabel = '决斗链接'>
-				<DuelLinksNew navigator={this.props.navigator} route = {this.props.route}  />
+				<DuelLinksNew navigator={this.props.navigator} route = {this.props.route} categoryKey={cates[0].key } />
 			</View>
 			<View tabLabel='游戏王OCG'>
 			</View>

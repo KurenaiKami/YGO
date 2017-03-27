@@ -24,24 +24,28 @@ const Items = [
 		title: '资讯',
 		icon_n: require('../Resources/Images/news_normal.png'),
 		icon_s: require('../Resources/Images/news_sel.png'),
+		content: News
 	},
 	{
 		key: 'strategy',
 		title: '攻略',
 		icon_n: require('../Resources/Images/strategy_normal.png'),
 		icon_s: require('../Resources/Images/strategy_sel.png'),
+		content:  News
 	},
 	{
 		key: 'cards',
 		title: '卡组',
 		icon_n: require('../Resources/Images/cards_normal.png'),
 		icon_s: require('../Resources/Images/cards_sel.png'),
+		content:  News
 	},
 	{
 		key: 'around',
 		title: '个人中心',
 		icon_n: require('../Resources/Images/shop_normal.png'),
 		icon_s: require('../Resources/Images/shop_sel.png'),
+		content:  News
 	}
 ];
 
@@ -64,47 +68,39 @@ const Items = [
 		const {dispatch} = this.props;
 	}
 
-	renderItem(item,page)
-	{
-		return(
-			<TabNavigator.Item
-				selected = {this.state.selectedTab === item.key}
-			    title = {item.title}
-			    titleStyle = {styles.tabText}
-				selectedTitleStyle = {styles.tabSelText}
-			    renderIcon = { () => <Image  style={styles.icon} source={item.icon_n} /> }
-			    renderSelectedIcon = { () => <Image style={styles.icon}  source={item.icon_s} />  }
-				onPress = {() => this.setState( {selectedTab: item.key} ) }
-			>
-				{this._getComponent(item.key)}
-			</TabNavigator.Item>
-		);
-	}
-
-    _getComponent(key)
-	{
-		let Content ;
-		switch (key){
-			case 'news':
-				Content = <News navigator = {this.props.navigator} route = {this.props.route} />
-				break;
-			default:
-				Content = <View></View>
-		}
-
-		return Content;
-	}
 
 	render()
 	{
         const {mainPage} = this.props;
-		let navItems = [];
-		navItems.push( Items.map( (item,page) => this.renderItem(item,page) ) );
-		return(
-			<TabNavigator  tabBarStyle={styles.tab}>
-				{navItems}
-			</TabNavigator>
-		);
+
+        return(
+	        <TabNavigator  tabBarStyle={styles.tab}>
+		        {
+			        Items.map((item,page) =>
+			        {
+			        	let Content = item.content;
+			        	return(
+					        <TabNavigator.Item
+						        selected = {this.state.selectedTab === item.key}
+						        title = {item.title}
+						        titleStyle = {styles.tabText}
+						        selectedTitleStyle = {styles.tabSelText}
+						        renderIcon = { () => <Image  style={styles.icon} source={item.icon_n} /> }
+						        renderSelectedIcon = { () => <Image style={styles.icon}  source={item.icon_s} />  }
+						        onPress = {() => this.setState( {selectedTab: item.key} ) }
+					            key = {page}
+					        >
+						        <Content navigator = {this.props.navigator} route = {this.props.route} />
+					        </TabNavigator.Item>
+				        )
+
+
+			        })
+		        }
+	        </TabNavigator>
+        );
+
+
 	}
 }
 

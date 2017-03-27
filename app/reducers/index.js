@@ -1,8 +1,9 @@
 import {combineReducers} from 'redux';
 
-import {login} from './LoginReducer'
+import {onLineNews} from './OnLineNewsReducer'
+
 
 const rootReducer = combineReducers({
-	login
+	onLineNews
 });
 export default rootReducer;
