@@ -50,6 +50,7 @@ class DuelLinksNew extends Component
 			let listData = onLineNews [this.props.categoryKey].newsList === undefined ? [] : onLineNews [this.props.categoryKey].newsList;
 			return(
 				<ListView
+					enableEmptySections={true}
 					dataSource={this.dataSource.cloneWithRows(Array.from(listData) )}
 					renderRow={this._renderListItemView.bind(this)}
 				/>
