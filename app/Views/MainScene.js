@@ -17,6 +17,11 @@ import { connect } from 'react-redux';
 import TabNavigator from 'react-native-tab-navigator';
 
 import News from './News'
+import CardsView from  './CardsView'
+import StrategyView from  './StrategyView'
+import MineView from  './MineView'
+
+import Header from '../Component/Header'
 
 const Items = [
 	{
@@ -31,21 +36,21 @@ const Items = [
 		title: '攻略',
 		icon_n: require('../Resources/Images/strategy_normal.png'),
 		icon_s: require('../Resources/Images/strategy_sel.png'),
-		content:  News
+		content:  StrategyView
 	},
 	{
 		key: 'cards',
 		title: '卡组',
 		icon_n: require('../Resources/Images/cards_normal.png'),
 		icon_s: require('../Resources/Images/cards_sel.png'),
-		content:  News
+		content:  CardsView
 	},
 	{
 		key: 'around',
 		title: '个人中心',
 		icon_n: require('../Resources/Images/shop_normal.png'),
 		icon_s: require('../Resources/Images/shop_sel.png'),
-		content:  News
+		content:  MineView
 	}
 ];
 
@@ -74,30 +79,36 @@ const Items = [
         const {mainPage} = this.props;
 
         return(
-	        <TabNavigator  tabBarStyle={styles.tab}>
-		        {
-			        Items.map((item,page) =>
+        	<View style={{flex:1}}>
+		        <Header
+
+		        />
+		        <TabNavigator  tabBarStyle={styles.tab}>
 			        {
-			        	let Content = item.content;
-			        	return(
-					        <TabNavigator.Item
-						        selected = {this.state.selectedTab === item.key}
-						        title = {item.title}
-						        titleStyle = {styles.tabText}
-						        selectedTitleStyle = {styles.tabSelText}
-						        renderIcon = { () => <Image  style={styles.icon} source={item.icon_n} /> }
-						        renderSelectedIcon = { () => <Image style={styles.icon}  source={item.icon_s} />  }
-						        onPress = {() => this.setState( {selectedTab: item.key} ) }
-					            key = {page}
-					        >
-						        <Content navigator = {this.props.navigator} route = {this.props.route} />
-					        </TabNavigator.Item>
-				        )
+				        Items.map((item,page) =>
+				        {
+					        let Content = item.content;
+					        return(
+						        <TabNavigator.Item
+							        selected = {this.state.selectedTab === item.key}
+							        title = {item.title}
+							        titleStyle = {styles.tabText}
+							        selectedTitleStyle = {styles.tabSelText}
+							        renderIcon = { () => <Image  style={styles.icon} source={item.icon_n} /> }
+							        renderSelectedIcon = { () => <Image style={styles.icon}  source={item.icon_s} />  }
+							        onPress = {() => this.setState( {selectedTab: item.key} ) }
+							        key = {page}
+						        >
+							        <Content navigator = {this.props.navigator} route = {this.props.route} />
+						        </TabNavigator.Item>
+					        )
 
 
-			        })
-		        }
-	        </TabNavigator>
+				        })
+			        }
+		        </TabNavigator>
+	        </View>
+
         );
 
 
@@ -118,11 +129,11 @@ const styles = StyleSheet.create({
 		backgroundColor: '#f1f1f1',
 	},
 	tabText:{
-		fontSize:14,
+		fontSize:15,
 		color:'#979797'
 	},
 	tabSelText:{
-		color:'#24e2af'
+		color:'#03a9f4'
 	},
 	icon:{
 		width:30,

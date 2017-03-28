@@ -7,7 +7,7 @@ import {
 	TouchableOpacity
 } from 'react-native'
 
-import Constant from '../../Common/Constants'
+import Constants from '../../Common/Constants'
 
 export default class SingleImageCell extends Component{
 	render()
@@ -18,15 +18,15 @@ export default class SingleImageCell extends Component{
 				onPress = {this.props.touchAction}
 			>
 				<View style={styles.row}>
-					<Image source={{uri: category.image_list[0].src }}  style={styles.newsSingleImage} />
+					<Image source={{uri: category.picUrl }}  style={styles.newsSingleImage} />
 
 					<View style={styles.titleContainer}>
 						<Text style={styles.titleFont} numberOfLines={1}>{category.title}</Text>
-						<Text style={styles.introFont} numberOfLines={1} >{category.intro}</Text>
+						<Text style={styles.introFont} numberOfLines={1} >{category.description}</Text>
 					</View>
 
 					<View>
-						<Text>{category.pv}</Text>
+						<Text>{category.ctime}</Text>
 					</View>
 				</View>
 
@@ -39,17 +39,17 @@ export default class SingleImageCell extends Component{
 const styles = StyleSheet.create({
 	row:{
 		flexDirection: 'row',
-		paddingTop: Constant.window.margin,
-		paddingBottom: Constant.window.margin,
-		marginRight: Constant.window.margin,
-		marginLeft: Constant.window.margin,
+		paddingTop: Constants.window.margin,
+		paddingBottom: Constants.window.margin,
+		marginRight: Constants.window.margin,
+		marginLeft: Constants.window.margin,
 		borderBottomWidth: 0.5,
 		borderBottomColor: 'rgba(131, 131, 131, 0.6)'
 	},
 	pvImage: {width: 15, height: 10},
 	newsSingleImage: {height: 70, width: 95},
 	titleContainer:{
-		marginLeft:Constant.window.margin
+		marginLeft:Constants.window.margin
 	},
 	titleFont:{
 		fontWeight:'bold',

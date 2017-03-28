@@ -13,13 +13,18 @@ import {
 
 import { fetchNewsListByPage } from '../../actions/HomeAction'
 
-import AdCell from '../../Component/cell/AdCell'
+import SingleImageCell from '../../Component/cell/SingleImageCell'
 
-const {width} = Dimensions.get('window');
+const {width,height} = Dimensions.get('window');
 
 import {connect} from 'react-redux'
 
-const pageLimit = 10;
+import {AdMobBanner} from 'react-native-admob'
+
+import Spinner from 'react-native-spinkit';
+
+
+const pageLimit = 30;
 
 class DuelLinksNew extends Component
 {
@@ -31,44 +36,37 @@ class DuelLinksNew extends Component
 	}
 
 	componentDidMount(){
-		this.props.dispatch(fetchNewsListByPage(this.props.categoryKey));
+		this.props.dispatch(fetchNewsListByPage(pageLimit));
 	}
 
-	render(){
-		const {onLineNews } = this.props;
-		if (onLineNews[this.props.categoryKey] )
+	render() {
+		const {onLineNews} = this.props;
+		if (onLineNews.state == "pre_fetch")
 		{
-			if (onLineNews[this.props.categoryKey].state == 'pre_fetch')
-			{
-				return(
-					<View>
-
-					</View>
-				);
-			}
-
-			let listData = onLineNews [this.props.categoryKey].newsList === undefined ? [] : onLineNews [this.props.categoryKey].newsList;
 			return(
+				<View style={styles.container}>
+					<Spinner style={styles.spinner} isVisible ={true} type={'WanderingCubes'} size = {100} color={"#03a9f4"} />
+				</View>
+			);
+		}
+		else
+		{
+			let listData = onLineNews.newsList === undefined ? [] : onLineNews.newsList;
+			console.log("_____" + listData);
+			return (
 				<ListView
 					enableEmptySections={true}
 					dataSource={this.dataSource.cloneWithRows(Array.from(listData) )}
 					renderRow={this._renderListItemView.bind(this)}
 				/>
-			);
+			)
+		}
 
-		}
-		else
-		{
-			return(
-				<View>
-				<Text>Loading</Text>
-			</View>);
-		}
 	}
 
 	_renderListItemView(data)
 	{
-		return <AdCell category= {data} />
+			return <SingleImageCell category= {data} />
 	}
 }
 
@@ -82,6 +80,16 @@ function mapStateToProps(state) {
 export default connect(mapStateToProps)(DuelLinksNew);
 
 const styles = StyleSheet.create({
-	wrapper: {
+	container: {
+		flex:1,
+		justifyContent:'center',
+		alignItems:'center'
+	},
+	spinner:{
+		marginTop: height/2
+	},
+	spinnerText:{
+		color:"#03a9f4",
+		fontSize:16
 	}
 });
