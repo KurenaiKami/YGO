@@ -34,8 +34,9 @@ export default class OCGNews extends Component
 		return(
 			<View style={styles.container}>
 				<AdMobBanner
-					bannerSize="mediumRectangle"
-					adUnitID="ca-app-pub-2034229154215609/5727787771"
+					style={styles.banner}
+					bannerSize="banner"
+					adUnitID="ca-app-pub-2034229154215609/3158764170"
 					testDeviceID="EMULATOR"
 					didFailToReceiveAdWithError={this.bannerError} />
 
@@ -48,6 +49,12 @@ export default class OCGNews extends Component
 
 const styles = StyleSheet.create({
 	container:{
-		flex:1
+		flex:1,
+		alignItems:'center',
+		justifyContent:'center'
+	},
+	banner:{
+
 	}
+
 })

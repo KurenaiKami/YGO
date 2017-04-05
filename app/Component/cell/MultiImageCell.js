@@ -7,7 +7,7 @@ import {
 	Image,
 	View,
 	Text,
-	TouchableHighlight
+	TouchableNativeFeedback
 } from 'react-native';
 
 import Constants from '../../Common/Constants'
@@ -18,7 +18,7 @@ export default class MultiImageCell extends Component
 		let {category} = this.props;
 
 		return(
-			<TouchableHighlight
+			<TouchableNativeFeedback
 				onPress = {this.props.touchAction}
 			>
 				<View style={styles.row}>
@@ -31,11 +31,13 @@ export default class MultiImageCell extends Component
 
 					<View style={styles.mulContainer}>
 						{
-							category.img_list.map((imgObj,i) => {
+							category.image_list.map((imgObj,i) => {
+								console.log("image");
+								console.log(imgObj);
 								return(
 									<Image
 										key={i}
-									    source={{uri: imgObj.src}}
+									    source={{uri: imgObj}}
 									    style={styles.imgmul}
 									/>
 								);
@@ -43,7 +45,7 @@ export default class MultiImageCell extends Component
 						}
 					</View>
 				</View>
-			</TouchableHighlight>
+			</TouchableNativeFeedback>
 		);
 	}
 
@@ -56,6 +58,7 @@ const styles = StyleSheet.create({
 		marginRight: Constants.window.margin,
 		marginLeft: Constants.window.margin,
 		borderBottomWidth: 0.5,
+		backgroundColor: 'white',
 		borderBottomColor: 'rgba(131, 131, 131, 0.6)'
 	},
 	titleFont:{

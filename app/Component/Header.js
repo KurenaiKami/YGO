@@ -109,13 +109,13 @@ const styles = StyleSheet.create({
 	leftIcon: {
 		position: 'absolute',
 		left: 10,
-		top: 7
+		top: -10
 	},
 
 	rightIcon: {
 		position: 'absolute',
 		right: 10,
-		top: 7
+		top: -10
 	},
 
 	rightButton: {

@@ -4,7 +4,7 @@ import {
 	Image,
 	View,
 	Text,
-	TouchableOpacity
+	TouchableNativeFeedback
 } from 'react-native'
 
 import Constants from '../../Common/Constants'
@@ -14,23 +14,35 @@ export default class SingleImageCell extends Component{
 	{
 		let {category} = this.props;
 		return(
-			<TouchableOpacity
+			<TouchableNativeFeedback
 				onPress = {this.props.touchAction}
 			>
 				<View style={styles.row}>
-					<Image source={{uri: category.picUrl }}  style={styles.newsSingleImage} />
+					<Image source={{uri: category.image_list[0] }}  style={styles.newsSingleImage} />
 
-					<View style={styles.titleContainer}>
-						<Text style={styles.titleFont} numberOfLines={1}>{category.title}</Text>
-						<Text style={styles.introFont} numberOfLines={1} >{category.description}</Text>
+					<View style={styles.itemDescription}>
+						<Text style={styles.itemTitle}
+						      numberOfLines={4}>
+							{category.title}
+						</Text>
+
+						<View style={styles.detail}>
+							<Text style={styles.author}
+							      numberOfLines={1}>
+								{category.author}
+							</Text>
+
+							<Text style={styles.time}>
+								{category.time}
+							</Text>
+						</View>
+
+
 					</View>
 
-					<View>
-						<Text>{category.ctime}</Text>
-					</View>
 				</View>
 
-			</TouchableOpacity>
+			</TouchableNativeFeedback>
 		);
 	}
 }
@@ -44,20 +56,30 @@ const styles = StyleSheet.create({
 		marginRight: Constants.window.margin,
 		marginLeft: Constants.window.margin,
 		borderBottomWidth: 0.5,
-		borderBottomColor: 'rgba(131, 131, 131, 0.6)'
+		backgroundColor: 'white',
+		borderBottomColor: 'rgba(131, 131, 131, 0.7)'
 	},
 	pvImage: {width: 15, height: 10},
 	newsSingleImage: {height: 70, width: 95},
-	titleContainer:{
-		marginLeft:Constants.window.margin
+	itemDescription: {
+		flex: 1,
+		marginLeft: 8,
+		marginRight: 8,
+		marginBottom: 8,
 	},
-	titleFont:{
-		fontWeight:'bold',
-		fontSize: 16
+	itemTitle: {
+		flex: 1,
+		color: 'black',
+		fontSize: 16,
 	},
-	introFont:{
-		color:'gray',
-		fontSize:14,
-		marginTop:7
-	}
+	detail: {
+		flexDirection:'row',
+		justifyContent:'space-between'
+	},
+	author:{
+		color:'gray'
+	},
+	time: {
+		color: 'gray',
+	},
 })

@@ -14,6 +14,7 @@ import {
 import { fetchNewsListByPage } from '../../actions/HomeAction'
 
 import SingleImageCell from '../../Component/cell/SingleImageCell'
+import MultiImageCell from '../../Component/cell/MultiImageCell'
 
 const {width,height} = Dimensions.get('window');
 
@@ -23,11 +24,17 @@ import {AdMobBanner} from 'react-native-admob'
 
 import Spinner from 'react-native-spinkit';
 
+import NavigatorRoute from '../../Common/NavigatorRoute'
+
 
 const pageLimit = 30;
 
 class DuelLinksNew extends Component
 {
+	static propTypes = {
+		navigator: React.PropTypes.object.isRequired,
+		route: React.PropTypes.object.isRequired,
+	};
 
 	constructor(props)
 	{
@@ -66,7 +73,19 @@ class DuelLinksNew extends Component
 
 	_renderListItemView(data)
 	{
-			return <SingleImageCell category= {data} />
+		if (data.image_list.length == 3)
+		{
+			return <MultiImageCell category= {data} touchAction={this._touchAction.bind(this,data)   } />
+		}
+		else
+		{
+			return <SingleImageCell category= {data} touchAction={this._touchAction.bind(this,data)   } />
+		}
+	}
+
+	_touchAction(category)
+	{
+		NavigatorRoute.pushToWebViewScene(this.props.navigator,category);
 	}
 }
 
