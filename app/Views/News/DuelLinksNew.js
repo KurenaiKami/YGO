@@ -9,6 +9,7 @@ import {
 	Image,
 	View,
     ListView,
+	RefreshControl
 } from 'react-native';
 
 import { fetchNewsListByPage } from '../../actions/HomeAction'
@@ -27,6 +28,7 @@ import Spinner from 'react-native-spinkit';
 import NavigatorRoute from '../../Common/NavigatorRoute'
 
 
+
 const pageLimit = 30;
 
 class DuelLinksNew extends Component
@@ -39,11 +41,12 @@ class DuelLinksNew extends Component
 	constructor(props)
 	{
 		super(props);
-		this.dataSource = new ListView.DataSource({rowHasChanged: (r1,r2) => r1 !== r2})
+		this.dataSource = new ListView.DataSource({rowHasChanged: (r1,r2) => r1 !== r2});
+
 	}
 
 	componentDidMount(){
-		this.props.dispatch(fetchNewsListByPage(pageLimit));
+		this.props.dispatch(fetchNewsListByPage());
 	}
 
 	render() {
@@ -56,19 +59,36 @@ class DuelLinksNew extends Component
 				</View>
 			);
 		}
-		else
+		else if (onLineNews.state == 'fetch_ok')
 		{
 			let listData = onLineNews.newsList === undefined ? [] : onLineNews.newsList;
-			console.log("_____" + listData);
+			console.log("_____" + onLineNews.loading);
 			return (
 				<ListView
 					enableEmptySections={true}
 					dataSource={this.dataSource.cloneWithRows(Array.from(listData) )}
 					renderRow={this._renderListItemView.bind(this)}
+					refreshControl={
+		                <RefreshControl
+		                  refreshing={onLineNews.loading}
+                          onRefresh={this._fetching.bind(this)}
+		                />
+		              }
 				/>
 			)
 		}
+		else
+		{
+			return(
+				<View></View>
+			);
+		}
 
+	}
+
+	_fetching()
+	{
+		this.props.dispatch(fetchNewsListByPage());
 	}
 
 	_renderListItemView(data)
@@ -93,7 +113,7 @@ class DuelLinksNew extends Component
 function mapStateToProps(state) {
     const { onLineNews  } = state;
     return {
-	    onLineNews ,
+	    onLineNews
     }
 }
 export default connect(mapStateToProps)(DuelLinksNew);
