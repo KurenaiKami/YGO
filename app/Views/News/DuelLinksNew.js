@@ -79,6 +79,7 @@ class DuelLinksNew extends Component
 		}
 		else
 		{
+			console.log('rending.........................');
 			return(
 				<View></View>
 			);

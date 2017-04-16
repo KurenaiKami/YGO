@@ -2,8 +2,7 @@ import * as types from './ActionTypes'
 import NetUtils from  '../utils/NetUtils'
 
 import {
-	APP_KEY_ONLINE_NEWS,
-	URL_ONLINE_NEWS,
+    URL_ONLINE_DL_NEWS,
 } from  '../Common/Constants';
 
 
@@ -13,7 +12,7 @@ export function fetchNewsListByPage() {
 			type: types.ACTION_ONLINE_NEWS_PRE_FETCH,
 			state: 'pre_fetch',
 		});
-		NetUtils.get(URL_ONLINE_NEWS)
+		NetUtils.get(URL_ONLINE_DL_NEWS)
 			.then(function (result) {
 				console.log(result);
 				if (result.code == 200) {

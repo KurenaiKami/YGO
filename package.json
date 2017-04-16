@@ -11,7 +11,7 @@
     "react-native": " 0.42.3",
     "react-native-admob": "^1.2.1",
     "react-native-gifted-listview": "0.0.15",
-    "react-native-scrollable-tab-view": "^0.7.3",
+    "react-native-scrollable-tab-view": "^0.6.0",
     "react-native-spinkit": "^1.0.2",
     "react-native-swiper": "^1.5.4",
     "react-native-tab-navigator": "^0.3.3",

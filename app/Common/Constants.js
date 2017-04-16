@@ -14,10 +14,16 @@ export default Constants = {
 }
 
 
-export const URL = 'http://192.168.0.130:3000';
-//在线新闻
-export const APP_KEY_ONLINE_NEWS = '56ea19cddad7e896b6e90d5d4cde3628';
-export const URL_ONLINE_NEWS = URL + '/getDlNews';
+export const URL = 'http://118.184.49.232:3002';
+//在线DL新闻
+export const URL_ONLINE_DL_NEWS = URL + '/getDlNews?type=dl';
+//在线OCG新闻
+export const URL_ONLINE_OCG_NEWS = URL + '/getDlNews?type=ocg';
+//攻略
+export const URL_ONLINE_GONGLUE_NEWS = URL + '/getDlNews?type=gonglue';
+//在线CARD新闻
+export const URL_ONLINE_CARD_NEWS = URL + '/getDlNews?type=card';
+
 
 export const URL_NEWS_DETAIL= URL + '/news?key=';
 
