@@ -1,9 +1,15 @@
 import {combineReducers} from 'redux';
 
-import {onLineNews} from './OnLineNewsReducer'
+import {
+	onLineNews,
+	OCGNews,
+	CardNews
+} from './OnLineNewsReducer'
 
 
 const rootReducer = combineReducers({
-	onLineNews
+	onLineNews,
+	OCGNews,
+	CardNews
 });
 export default rootReducer;

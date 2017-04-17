@@ -9,20 +9,77 @@ export function onLineNews(state=[],action)
 {
 	switch (action.type) {
 		case types.ACTION_ONLINE_NEWS_PRE_FETCH:
-			return Object.assign({}, state, {
+			return {
 				state: action.state,
 				loading: true,
-			});
+			};
+			break;
 		case types.ACTION_ONLINE_NEWS_FETCH_OK:
-			return Object.assign({}, state, {
+			return {
 				newsList: action.newsList,
 				state: action.state,
 				loading: false,
-			});
+			};
+			break;
 		case types.ACTION_ONLINE_NEWS_FETCH_ERROR:
-			return Object.assign({}, state, {
+			{
 				state:action.state
-			});
+			};
+			break;
+		default:
+			return state;
+	}
+}
+
+export function OCGNews(state=[],action) {
+	switch (action.type)
+	{
+		case types.ACTION_OCG_NEWS_PRE_FETCH:
+			return{
+				state: action.state,
+				loading: true
+			}
+			break;
+		case types.ACTION_OCG_NEWS_FETCH_OK:
+			return {
+				newsList: action.newsList,
+				state: action.state,
+				loading: false,
+			}
+			break;
+		case types.ACTION_OCG_NEWS_FETCH_ERROR:
+			return {
+				state: action.state,
+				loading: false,
+			}
+			break;
+		default:
+			return state;
+	}
+}
+
+export function CardNews(state = [],action) {
+	switch(action.type)
+	{
+		case types.ACTION_CARD_NEWS_PRE_FETCH:
+			return {
+				state: action.state,
+				loading: true
+			}
+			break;
+		case types.ACTION_CARD_NEWS_FETCH_OK:
+			return {
+				state: action.state,
+				loading: false,
+				newsList: action.newsList
+			}
+			break;
+		case types.ACTION_CARD_NEWS_FETCH_ERROR:
+			return {
+				state: action.state,
+				loading: false
+			}
+			break;
 		default:
 			return state;
 	}

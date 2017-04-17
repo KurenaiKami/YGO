@@ -48,8 +48,8 @@ const Items = [
 	{
 		key: 'around',
 		title: '个人中心',
-		icon_n: require('../Resources/Images/shop_normal.png'),
-		icon_s: require('../Resources/Images/shop_sel.png'),
+		icon_n: require('../Resources/Images/mine_normal.png'),
+		icon_s: require('../Resources/Images/mine_sel.png'),
 		content:  MineView
 	}
 ];
@@ -127,6 +127,8 @@ const styles = StyleSheet.create({
 	tab:{
 		height:62,
 		backgroundColor: '#f1f1f1',
+		borderTopColor:'#aaaaaa',
+		borderTopWidth: 0.5,
 	},
 	tabText:{
 		fontSize:15,

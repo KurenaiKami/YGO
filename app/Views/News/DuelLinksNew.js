@@ -21,15 +21,15 @@ const {width,height} = Dimensions.get('window');
 
 import {connect} from 'react-redux'
 
-import {AdMobBanner} from 'react-native-admob'
-
 import Spinner from 'react-native-spinkit';
 
 import NavigatorRoute from '../../Common/NavigatorRoute'
 
+import RNFS from 'react-native-fs';
 
 
 const pageLimit = 30;
+const path = RNFS.DocumentDirectoryPath + '/dl.json';
 
 class DuelLinksNew extends Component
 {
@@ -42,7 +42,6 @@ class DuelLinksNew extends Component
 	{
 		super(props);
 		this.dataSource = new ListView.DataSource({rowHasChanged: (r1,r2) => r1 !== r2});
-
 	}
 
 	componentDidMount(){
@@ -51,6 +50,7 @@ class DuelLinksNew extends Component
 
 	render() {
 		const {onLineNews} = this.props;
+
 		if (onLineNews.state == "pre_fetch")
 		{
 			return(
@@ -62,7 +62,7 @@ class DuelLinksNew extends Component
 		else if (onLineNews.state == 'fetch_ok')
 		{
 			let listData = onLineNews.newsList === undefined ? [] : onLineNews.newsList;
-			console.log("_____" + onLineNews.loading);
+
 			return (
 				<ListView
 					enableEmptySections={true}
@@ -79,7 +79,6 @@ class DuelLinksNew extends Component
 		}
 		else
 		{
-			console.log('rending.........................');
 			return(
 				<View></View>
 			);
@@ -112,10 +111,7 @@ class DuelLinksNew extends Component
 
 
 function mapStateToProps(state) {
-    const { onLineNews  } = state;
-    return {
-	    onLineNews
-    }
+    return state;
 }
 export default connect(mapStateToProps)(DuelLinksNew);
 

@@ -10,10 +10,18 @@ import
 } from 'react-native'
 
 import {
+	AdMobBanner,
+	AdMobInterstitial,
+	PublisherBanner,
+	AdMobRewarded
+} from 'react-native-admob'
+
+import {
 	URL_NEWS_DETAIL,
 } from  '../../Common/Constants';
 
 import Header from '../../Component/Header'
+import CommentToolbar from '../../Component/CommentToolbar'
 
 import Constants from '../../Common/Constants'
 
@@ -42,15 +50,39 @@ class NewsDetail extends Component
 				<WebView
 					ref="webView"
 					source={{uri:  URL_NEWS_DETAIL +params.news_path}}
-				    startInLoadingState={true}
+					startInLoadingState={true}
 					scrollEnabled={false}
 					scalesPageToFit={true}
 					javaScriptEnabled={true}
 
-				    style={styles.webview}
+					style={styles.webview}
 				/>
+
+				<View style={styles.banner}>
+					<AdMobBanner
+						bannerSize="banner"
+						adUnitID="ca-app-pub-2034229154215609/3158764170"
+						testDeviceID="EMULATOR"
+						didFailToReceiveAdWithError={this.bannerError} />
+				</View>
+				<CommentToolbar
+					comment = "1233"
+					commentAction = {this._commentAction}
+				    getCommentList = {this._getCommentList}
+				/>
+
 			</View>
 		);
+	}
+
+	_commentAction()
+	{
+
+	}
+
+	_getCommentList()
+	{
+
 	}
 
 	_touchAction(){
@@ -69,6 +101,9 @@ export default connect(mapStateToProps)(NewsDetail);
 const styles = StyleSheet.create({
 	container:{
 		flex:1,
+	},
+	banner:{
+		alignItems:'center',
 	},
 	webview:{
 		width: Constants.window.width,
