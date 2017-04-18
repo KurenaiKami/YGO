@@ -2,14 +2,40 @@ import React,{Component} from 'react';
 import {
     StyleSheet,
     Navigator,
-    BackAndroid
+    BackAndroid,
+	Platform
 } from 'react-native';
 
 import Splash from './Splash';
 
+import NavigatorRoute from '../Common/NavigatorRoute'
 
+import * as WeChat from 'react-native-wechat';
+
+var _navigator = null;
 export default class NavigatorRoot extends Component{
+	constructor(props){
+		super(props);
+		this.isIOS = Platform.OS === 'ios'?true:false;
+	}
 
+	componentDidMount(){
+		WeChat.registerApp('1234567');
+		WeChat.openWXApp();
+		if (!this.isIOS)
+		{
+			BackAndroid.addEventListener('hardwareBackPress',() => {
+				return NavigatorRoute.popBack(_navigator);
+			})
+		}
+	}
+
+	componentWillUnmount(){
+		if (!this.isIOS)
+		{
+			BackAndroid.removeEventListener('hardwardBackPress');
+		}
+	}
     render(){
         return(
             <Navigator
@@ -27,7 +53,7 @@ export default class NavigatorRoot extends Component{
     _renderScene(route,navigator)
     {
         let Component  = route.component;
-        this._nav = navigator;
+	    _navigator = navigator;
         return(
             <Component  navigator = {navigator} route = {route} />
         )

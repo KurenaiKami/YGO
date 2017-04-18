@@ -7,17 +7,35 @@ import {
 	StyleSheet,
 	View,
 	Text,
-	ScrollView
+	ScrollView,
+	TouchableOpacity
 } from 'react-native'
+
 
 export default class MineView extends Component
 {
+	constructor(props)
+	{
+		super(props);
+		this.state = {
+			Promise: {}
+		}
+	}
 	render()
 	{
 		return(
 			<View>
-
+				<TouchableOpacity
+					onPress = {this._openweibo.bind(this)}
+				>
+					<Text>Open weibo</Text>
+				</TouchableOpacity>
 			</View>
 		);
+	}
+
+	_openweibo()
+	{
+
 	}
 }

@@ -109,3 +109,38 @@ export function fetchCardNews() {
 }
 
 
+
+//获取攻畋信息
+export function fetchStrateNews() {
+	return dispatch => {
+		dispatch({
+			type: types.ACTION_GONGLUE_NEWS_PRE_FETCH,
+			state: 'card_pre_fetch'
+		});
+
+		NetUtils.get(URL_ONLINE_GONGLUE_NEWS)
+			.then(function (result) {
+				if (result.code == 200)
+				{
+					dispatch({
+						type: types.ACTION_GONGLUE_NEWS_FETCH_OK,
+						state: 'card_fetch_ok',
+						newsList: result.newslist
+					})
+				}
+				else
+				{
+					dispatch({
+						type: types.ACTION_GONGLUE_NEWS_FETCH_ERROR,
+						state: 'card_fetch_error'
+					})
+				}
+			},function () {
+				dispatch({
+					type: types.ACTION_GONGLUE_NEWS_FETCH_ERROR,
+					state: 'card_fetch_error'
+				})
+			})
+	}
+}
+

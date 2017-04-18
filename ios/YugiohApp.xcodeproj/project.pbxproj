@@ -49,6 +49,8 @@
 		A415C84611144C4C8DA86A54 /* libRNAdMobManager.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 60403381B11842EFAF851D79 /* libRNAdMobManager.a */; };
 		13638F2E015A44D98274364B /* libRNSpinkit.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4B0421182ACE4F62A0BD3E07 /* libRNSpinkit.a */; };
 		10489858F6CD4C6DA44DB4B9 /* libRNFS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 55B36B4404DB4724A5EEE89A /* libRNFS.a */; };
+		1615D68B57804A149EE16FA8 /* libRCTWeChat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53CBEF4FDDE246C3BDDA96AA /* libRCTWeChat.a */; };
+		C407EF351271438289F70F58 /* libRCTWeiboAPI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D324B5E452D4A23B13AD033 /* libRCTWeiboAPI.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -286,6 +288,10 @@
 		4B0421182ACE4F62A0BD3E07 /* libRNSpinkit.a */ = {isa = PBXFileReference; name = "libRNSpinkit.a"; path = "libRNSpinkit.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		E0B95FAB6F704642AFD7468B /* RNFS.xcodeproj */ = {isa = PBXFileReference; name = "RNFS.xcodeproj"; path = "../node_modules/react-native-fs/RNFS.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		55B36B4404DB4724A5EEE89A /* libRNFS.a */ = {isa = PBXFileReference; name = "libRNFS.a"; path = "libRNFS.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		D78FE31C25BD41C7B4F809CD /* RCTWeChat.xcodeproj */ = {isa = PBXFileReference; name = "RCTWeChat.xcodeproj"; path = "../node_modules/react-native-wechat/ios/RCTWeChat.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		53CBEF4FDDE246C3BDDA96AA /* libRCTWeChat.a */ = {isa = PBXFileReference; name = "libRCTWeChat.a"; path = "libRCTWeChat.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		69D6589BA96744E7BBAFEE1A /* RCTWeiboAPI.xcodeproj */ = {isa = PBXFileReference; name = "RCTWeiboAPI.xcodeproj"; path = "../node_modules/react-native-weibo/ios/RCTWeiboAPI.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		8D324B5E452D4A23B13AD033 /* libRCTWeiboAPI.a */ = {isa = PBXFileReference; name = "libRCTWeiboAPI.a"; path = "libRCTWeiboAPI.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -316,6 +322,8 @@
 				A415C84611144C4C8DA86A54 /* libRNAdMobManager.a in Frameworks */,
 				13638F2E015A44D98274364B /* libRNSpinkit.a in Frameworks */,
 				10489858F6CD4C6DA44DB4B9 /* libRNFS.a in Frameworks */,
+				1615D68B57804A149EE16FA8 /* libRCTWeChat.a in Frameworks */,
+				C407EF351271438289F70F58 /* libRCTWeiboAPI.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -486,6 +494,8 @@
 				20C0059176FF44B2B60F5C26 /* RNAdMobManager.xcodeproj */,
 				DB1080DBDADB4682B5415020 /* RNSpinkit.xcodeproj */,
 				E0B95FAB6F704642AFD7468B /* RNFS.xcodeproj */,
+				D78FE31C25BD41C7B4F809CD /* RCTWeChat.xcodeproj */,
+				69D6589BA96744E7BBAFEE1A /* RCTWeiboAPI.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1046,6 +1056,8 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1053,6 +1065,8 @@
 					"$(SRCROOT)\..\node_modules\react-native-admob\ios",
 					"$(SRCROOT)\..\node_modules\react-native-spinkit\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-fs/**",
+					"$(SRCROOT)\..\node_modules\react-native-wechat\ios",
+					"$(SRCROOT)\..\node_modules\react-native-weibo\ios/**",
 				);
 			};
 			name = Debug;
@@ -1077,6 +1091,8 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1084,6 +1100,8 @@
 					"$(SRCROOT)\..\node_modules\react-native-admob\ios",
 					"$(SRCROOT)\..\node_modules\react-native-spinkit\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-fs/**",
+					"$(SRCROOT)\..\node_modules\react-native-wechat\ios",
+					"$(SRCROOT)\..\node_modules\react-native-weibo\ios/**",
 				);
 			};
 			name = Release;
@@ -1109,6 +1127,8 @@
 					"$(SRCROOT)\..\node_modules\react-native-admob\ios",
 					"$(SRCROOT)\..\node_modules\react-native-spinkit\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-fs/**",
+					"$(SRCROOT)\..\node_modules\react-native-wechat\ios",
+					"$(SRCROOT)\..\node_modules\react-native-weibo\ios/**",
 				);
 			};
 			name = Debug;
@@ -1133,6 +1153,8 @@
 					"$(SRCROOT)\..\node_modules\react-native-admob\ios",
 					"$(SRCROOT)\..\node_modules\react-native-spinkit\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-fs/**",
+					"$(SRCROOT)\..\node_modules\react-native-wechat\ios",
+					"$(SRCROOT)\..\node_modules\react-native-weibo\ios/**",
 				);
 			};
 			name = Release;
@@ -1166,6 +1188,8 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1173,6 +1197,8 @@
 					"$(SRCROOT)\..\node_modules\react-native-admob\ios",
 					"$(SRCROOT)\..\node_modules\react-native-spinkit\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-fs/**",
+					"$(SRCROOT)\..\node_modules\react-native-wechat\ios",
+					"$(SRCROOT)\..\node_modules\react-native-weibo\ios/**",
 				);
 			};
 			name = Debug;
@@ -1206,6 +1232,8 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1213,6 +1241,8 @@
 					"$(SRCROOT)\..\node_modules\react-native-admob\ios",
 					"$(SRCROOT)\..\node_modules\react-native-spinkit\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-fs/**",
+					"$(SRCROOT)\..\node_modules\react-native-wechat\ios",
+					"$(SRCROOT)\..\node_modules\react-native-weibo\ios/**",
 				);
 			};
 			name = Release;
@@ -1241,6 +1271,8 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
 			name = Debug;
@@ -1265,6 +1297,8 @@
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",

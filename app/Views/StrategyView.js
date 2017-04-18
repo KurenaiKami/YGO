@@ -1,26 +1,95 @@
 /**
- * Created by Administrator on 2017/3/28.
+ * Created by Administrator on 2017/4/17.
  */
-/**
- * Created by Administrator on 2017/3/28.
- */
-import React,{Component} from 'react'
+import React,{Component} from 'react';
 import {
-	Image,
 	StyleSheet,
 	View,
 	Text,
-	ScrollView
+	Image,
+	ListView,
+	RefreshControl
 } from 'react-native'
 
-export default class StrategyView extends Component
-{
-	render()
-	{
-		return(
-			<View>
+import SingleImageCell from '../Component/cell/SingleImageCell'
+import MultiImageCell from '../Component/cell/MultiImageCell'
+import Constants from '../Common/Constants'
+import NavigatorRoute from '../Common/NavigatorRoute'
 
-			</View>
-		);
+import {fetchStrateNews} from '../actions/HomeAction'
+
+import {connect} from 'react-redux'
+
+
+class StrategyView extends Component{
+	constructor(props)
+	{
+		super(props);
+		this.dataSource = new ListView.DataSource({rowHasChanged: (r1,r2) => r1 !== r2 })
+	}
+
+	componentDidMount()
+	{
+		this.props.dispatch(fetchStrateNews());
+	}
+
+	render(){
+		const {StrategyNews } = this.props;
+
+		let listData = StrategyNews.newsList === undefined ? []: StrategyNews.newsList;
+		if (StrategyNews.state == 'card_fetch_ok')
+		{
+			return(
+				<ListView
+					enableEmptySections={true}
+					dataSource={this.dataSource.cloneWithRows(Array.from(listData))}
+					renderRow={this._renderRowItem.bind(this)}
+					refreshControl={
+			        <RefreshControl
+			            refreshing={StrategyNews.loading}
+			            onRefresh={this._refresh.bind(this)}
+			        />
+			    }
+				/>
+			)
+		}
+		else
+		{
+			return(
+				<View></View>
+			)
+		}
+
+
+	}
+
+	_renderRowItem(data){
+		if (data.image_list.length == 3)
+		{
+			return <MultiImageCell category= {data} touchAction={this._touchAction.bind(this,data)   } />
+		}
+		else
+		{
+			return <SingleImageCell category= {data} touchAction={this._touchAction.bind(this,data)   } />
+		}
+	}
+
+	_touchAction(category)
+	{
+		NavigatorRoute.pushToWebViewScene(this.props.navigator,category);
+	}
+
+	_refresh()
+	{
+		this.props.dispatch(fetchStrateNews());
 	}
 }
+
+function  mapToStateProps(state) {
+	return state;
+}
+export default connect(mapToStateProps)(StrategyView)
+
+const styles = StyleSheet.create({
+
+})

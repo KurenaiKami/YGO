@@ -3,6 +3,8 @@ package com.yugiohapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.theweflex.react.WeChatPackage;
+import com.sbugert.rnadmob.RNAdMobPackage;
 import com.rnfs.RNFSPackage;
 import com.react.rnspinkit.RNSpinkitPackage;
 import com.sbugert.rnadmob.RNAdMobPackage;
@@ -28,9 +30,10 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new WeChatPackage(),
+            new RNAdMobPackage(),
             new RNFSPackage(),
-            new RNSpinkitPackage(),
-            new RNAdMobPackage()
+            new RNSpinkitPackage()
       );
     }
   };

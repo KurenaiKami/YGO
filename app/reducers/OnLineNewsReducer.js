@@ -84,3 +84,32 @@ export function CardNews(state = [],action) {
 			return state;
 	}
 }
+
+
+
+export function StrategyNews(state = [],action) {
+	switch(action.type)
+	{
+		case types.ACTION_GONGLUE_NEWS_PRE_FETCH:
+			return {
+				state: action.state,
+				loading: true
+			}
+			break;
+		case types.ACTION_GONGLUE_NEWS_FETCH_OK:
+			return {
+				state: action.state,
+				loading: false,
+				newsList: action.newsList
+			}
+			break;
+		case types.ACTION_GONGLUE_NEWS_FETCH_ERROR:
+			return {
+				state: action.state,
+				loading: false
+			}
+			break;
+		default:
+			return state;
+	}
+}

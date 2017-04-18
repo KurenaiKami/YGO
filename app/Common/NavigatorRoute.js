@@ -2,7 +2,8 @@ import React,{Component} from 'react';
 import
 {
     BackAndroid,
-    Alert
+    Alert,
+	ToastAndroid
 } from 'react-native';
 
 import MainScene from '../Views/MainScene'
@@ -29,7 +30,14 @@ export default class NavigatorRoute extends Component
         if (navigator && navigator.getCurrentRoutes().length > 1)
         {
         	navigator.pop();
+        	return true;
         }
+
+	    if (this.lastBackPressed && this.lastBackPressed + 2000 >= Date.now()) {
+		    return false;
+	    }
+	    this.lastBackPressed = Date.now();
+	    ToastAndroid.show('再按一次退出应用', ToastAndroid.SHORT);
         return true;
     }
 }
