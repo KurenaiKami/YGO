@@ -63,7 +63,7 @@ class VideoView extends Component
 
 	_touchAction(category)
 	{
-		NavigatorRoute.pushToWebViewScene(this.props.navigator,category);
+		NavigatorRoute.pushToVideoScene(this.props.navigator,category);
 	}
 
 	_refetch()

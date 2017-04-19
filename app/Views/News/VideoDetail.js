@@ -25,7 +25,6 @@ export default class VideoDetail extends Component{
 		return(
 			<View style={styles.container}>
 				<Header
-					title = "视频详情"
 					leftIcon="ios-arrow-back"
 					touchAction = {this._back.bind(this)}
 				/>
@@ -34,9 +33,10 @@ export default class VideoDetail extends Component{
 				       rate={1.0}
 				       volume={1.0}
 				       muted={false}
-				       paused={false}
+				       paused={true}
 				       resizeMode="cover"
-				       repeat={true}
+					   duration={0.0}
+					   currentTime ={0.0}
 				       style={{height: 200, width: Constants.window.width}}/>
 			</View>
 		)
