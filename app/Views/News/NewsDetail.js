@@ -61,7 +61,7 @@ class NewsDetail extends Component
 				<View style={styles.banner}>
 					<AdMobBanner
 						bannerSize="banner"
-						adUnitID="ca-app-pub-2034229154215609/3158764170"
+						adUnitID="ca-app-pub-2034229154215609/4962154175"
 						testDeviceID="EMULATOR"
 						didFailToReceiveAdWithError={this.bannerError} />
 				</View>

@@ -41,6 +41,7 @@ export default class CustomTabBar extends Component
                 onPress = { () => this.props.goToPage(page) }
                 style={styles.tab}
                 key={page}
+                activeOpacity={0.75}
             >
                 <View style={styles.tabItem}>
                     <Icon name = {this.props.tabIconName[page] }

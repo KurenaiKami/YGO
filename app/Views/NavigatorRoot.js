@@ -20,8 +20,8 @@ export default class NavigatorRoot extends Component{
 	}
 
 	componentDidMount(){
-		WeChat.registerApp('1234567');
-		WeChat.openWXApp();
+		//WeChat.registerApp('1234567');
+		//WeChat.openWXApp();
 		if (!this.isIOS)
 		{
 			BackAndroid.addEventListener('hardwareBackPress',() => {

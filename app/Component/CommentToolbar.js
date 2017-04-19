@@ -22,6 +22,7 @@ export default class CommentToolbar extends Component {
 				<TouchableOpacity
 					style = {styles.editComment}
 					onPress = {this.props.commentAction}
+				    activeOpacity={0.75}
 				>
 					<Icon name="edit" size={18} color="gray"  />
 					<Text>写评论</Text>
@@ -30,6 +31,7 @@ export default class CommentToolbar extends Component {
 				<TouchableOpacity
 					style = {styles.editComment}
 					onPress = {this.props.getCommentList}
+				    activeOpacity={0.75}
 				>
 					<Icon name="commenting-o" size={18} color="gray" />
 					<Text>{comment}</Text>

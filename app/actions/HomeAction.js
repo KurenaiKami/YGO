@@ -5,7 +5,8 @@ import {
     URL_ONLINE_DL_NEWS,
 	URL_ONLINE_OCG_NEWS,
 	URL_ONLINE_GONGLUE_NEWS,
-	URL_ONLINE_CARD_NEWS
+	URL_ONLINE_CARD_NEWS,
+	URL_ONLINE_GETVIDEOS
 } from  '../Common/Constants';
 
 //获取 DL信息
@@ -31,6 +32,7 @@ export function fetchNewsListByPage() {
 					});
 				}
 			}, function () {
+				console.log("error**************************");
 				dispatch({
 					type: types.ACTION_ONLINE_NEWS_FETCH_ERROR,
 					state: 'fetch_error',
@@ -139,6 +141,42 @@ export function fetchStrateNews() {
 				dispatch({
 					type: types.ACTION_GONGLUE_NEWS_FETCH_ERROR,
 					state: 'card_fetch_error'
+				})
+			})
+	}
+}
+
+
+
+//获取 OCG信息
+export function fetchVideos() {
+	return dispatch =>{
+		dispatch({
+			type: types.ACTION_VIDEO_NEWS_PRE_FETCH,
+			state: 'video_pre_fetch'
+		});
+
+		NetUtils.get(URL_ONLINE_GETVIDEOS)
+			.then(function (result) {
+				if (result.code == 200)
+				{
+					dispatch({
+						type: types.ACTION_VIDEO_NEWS_FETCH_OK,
+						state: 'video_fetch_ok',
+						newsList: result.newslist
+					})
+				}
+				else
+				{
+					dispatch({
+						type: types.ACTION_VIDEO_NEWS_FETCH_ERROR,
+						state: 'video_fetch_error'
+					})
+				}
+			},function () {
+				dispatch({
+					type: types.ACTION_VIDEO_NEWS_FETCH_ERROR,
+					state: 'video_fetch_error'
 				})
 			})
 	}

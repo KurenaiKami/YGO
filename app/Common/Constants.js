@@ -24,6 +24,8 @@ export const URL_ONLINE_GONGLUE_NEWS = URL + '/getDlNews?type=gonglue';
 //在线CARD新闻
 export const URL_ONLINE_CARD_NEWS = URL + '/getDlNews?type=card';
 
+export const URL_ONLINE_GETVIDEOS = URL + '/getvideos';
+
 
 export const URL_NEWS_DETAIL= URL + '/news?key=';
 

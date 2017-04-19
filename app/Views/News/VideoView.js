@@ -1,5 +1,5 @@
 /**
- * Created by Administrator on 2017/3/28.
+ * Created by Administrator on 2017/4/19.
  */
 import React,{Component} from 'react';
 import {
@@ -12,16 +12,15 @@ import {
 	RefreshControl
 } from 'react-native';
 
-import SingleImageCell from '../../Component/cell/SingleImageCell'
-import MultiImageCell from '../../Component/cell/MultiImageCell'
+import VideoCell from '../../Component/cell/VideoCell'
 
-import { fetchOCGNews } from '../../actions/HomeAction'
+import { fetchVideos } from '../../actions/HomeAction'
 
 import {connect} from 'react-redux'
 
 import NavigatorRoute from '../../Common/NavigatorRoute'
 
-class OCGNews extends Component
+class VideoView extends Component
 {
 	constructor(props)
 	{
@@ -31,16 +30,16 @@ class OCGNews extends Component
 	}
 
 	componentDidMount(){
-		this.props.dispatch(fetchOCGNews());
+		this.props.dispatch(fetchVideos());
 	}
 
 	render(){
-		const  {OCGNews} = this.props;
-		if (OCGNews.newsList )
+		const  {VideoNews} = this.props;
+		if (VideoNews.newsList )
 		{
-			this.newslist = OCGNews.newsList;
+			this.newslist = VideoNews.newsList;
 		}
-		let loading = OCGNews.loading == undefined? true : OCGNews.loading;
+		let loading = VideoNews.loading == undefined? true : VideoNews.loading;
 		return(
 			<ListView
 				enableEmptySections={true}
@@ -53,20 +52,13 @@ class OCGNews extends Component
 		        />
 		    }
 			/>
-		);
+		)
 
 	}
 
 	_renderItem(data)
 	{
-		if (data.image_list.length == 3)
-		{
-			return <MultiImageCell category= {data} touchAction={this._touchAction.bind(this,data)   } />
-		}
-		else
-		{
-			return <SingleImageCell category= {data} touchAction={this._touchAction.bind(this,data)   } />
-		}
+		return <VideoCell category= {data} touchAction={this._touchAction.bind(this,data)   } />
 	}
 
 	_touchAction(category)
@@ -76,7 +68,7 @@ class OCGNews extends Component
 
 	_refetch()
 	{
-		this.props.dispatch(fetchOCGNews());
+		this.props.dispatch(fetchVideos());
 	}
 }
 
@@ -84,7 +76,7 @@ function mapStateToProps(state) {
 	return state;
 }
 
-export default connect(mapStateToProps)(OCGNews)
+export default connect(mapStateToProps)(VideoView)
 
 const styles = StyleSheet.create({
 	container:{

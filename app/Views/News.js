@@ -15,6 +15,7 @@ import { fetchWechatNewsListByPage } from '../actions/HomeAction'
 
 import DuelLinksNew from './News/DuelLinksNew'
 import OCGNews from './News/OCGNews'
+import VideoView from './News/VideoView'
 
 import { connect } from 'react-redux';
 
@@ -40,6 +41,7 @@ class News extends Component
 				<OCGNews navigator={this.props.navigator} route = {this.props.route} />
 			</View>
 			<View tabLabel='视频'>
+				<VideoView navigator={this.props.navigator} route = {this.props.route} />
 			</View>
 
 			</ScrollableTabView>

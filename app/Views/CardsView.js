@@ -26,6 +26,7 @@ class CardsView extends Component{
 	{
 		super(props);
 		this.dataSource = new ListView.DataSource({rowHasChanged: (r1,r2) => r1 !== r2 })
+		this.newsList = [];
 	}
 
 	componentDidMount()
@@ -35,31 +36,25 @@ class CardsView extends Component{
 
 	render(){
 		const {CardNews } = this.props;
-
-		let listData = CardNews.newsList === undefined ? []: CardNews.newsList;
-		if (CardNews.state == 'card_fetch_ok')
+		if (CardNews.newsList)
 		{
-			return(
-				<ListView
-					enableEmptySections={true}
-					dataSource={this.dataSource.cloneWithRows(Array.from(listData))}
-					renderRow={this._renderRowItem.bind(this)}
-					refreshControl={
-			        <RefreshControl
-			            refreshing={CardNews.loading}
-			            onRefresh={this._refresh.bind(this)}
-			        />
-			    }
-				/>
-			)
+			this.newsList = CardNews.newsList;
 		}
-		else
-		{
-			return(
-				<View></View>
-			)
-		}
+		let loading = CardNews.loading == undefined ? true : CardNews.loading;
 
+		return(
+			<ListView
+				enableEmptySections={true}
+				dataSource={this.dataSource.cloneWithRows(Array.from(this.newsList))}
+				renderRow={this._renderRowItem.bind(this)}
+				refreshControl={
+		        <RefreshControl
+		            refreshing={loading}
+		            onRefresh={this._refresh.bind(this)}
+		        />
+		    }
+			/>
+		)
 
 	}
 

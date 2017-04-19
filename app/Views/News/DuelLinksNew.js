@@ -26,10 +26,11 @@ import Spinner from 'react-native-spinkit';
 import NavigatorRoute from '../../Common/NavigatorRoute'
 
 import RNFS from 'react-native-fs';
-
+import LoadError from '../../Component/error'
 
 const pageLimit = 30;
 const path = RNFS.DocumentDirectoryPath + '/dl.json';
+import Constants from '../../Common/Constants'
 
 class DuelLinksNew extends Component
 {
@@ -42,6 +43,7 @@ class DuelLinksNew extends Component
 	{
 		super(props);
 		this.dataSource = new ListView.DataSource({rowHasChanged: (r1,r2) => r1 !== r2});
+		this.newslist = [];
 	}
 
 	componentDidMount(){
@@ -50,46 +52,39 @@ class DuelLinksNew extends Component
 
 	render() {
 		const {onLineNews} = this.props;
-
-		if (onLineNews.state == "pre_fetch")
+		if (onLineNews.newsList)
 		{
-			return(
-				<View style={styles.container}>
-					<Spinner style={styles.spinner} isVisible ={true} type={'WanderingCubes'} size = {100} color={"#03a9f4"} />
-				</View>
-			);
+			this.newslist = onLineNews.newsList;
 		}
-		else if (onLineNews.state == 'fetch_ok')
-		{
-			let listData = onLineNews.newsList === undefined ? [] : onLineNews.newsList;
-
-			return (
+		let loading = onLineNews.loading == undefined? true : onLineNews.loading;
+		return(
+			<View>
 				<ListView
+					style = {{height: Constants.window.height}}
 					enableEmptySections={true}
-					dataSource={this.dataSource.cloneWithRows(Array.from(listData) )}
+					dataSource={this.dataSource.cloneWithRows(Array.from(this.newslist) )}
 					renderRow={this._renderListItemView.bind(this)}
 					refreshControl={
 		                <RefreshControl
-		                  refreshing={onLineNews.loading}
-                          onRefresh={this._fetching.bind(this)}
+		                  refreshing={ loading }
+	                      onRefresh={this._fetching.bind(this)}
 		                />
-		              }
+	              }
 				/>
-			)
-		}
-		else
-		{
-			return(
-				<View></View>
-			);
-		}
 
+				{/*{this.newslist.length ==0 && !loading  ? <View style={styles.container}>*/}
+						 			                {/*<Spinner style={styles.spinner} isVisible ={true} type={'WanderingCubes'} size = {100} color={"#03a9f4"} />*/}
+					                               {/*</View> : null}*/}
+				{onLineNews.error ? <LoadError  reload={this._fetching.bind(this) } /> : null }
+			</View>
+		);
 	}
 
 	_fetching()
 	{
 		this.props.dispatch(fetchNewsListByPage());
 	}
+
 
 	_renderListItemView(data)
 	{
@@ -118,8 +113,6 @@ export default connect(mapStateToProps)(DuelLinksNew);
 const styles = StyleSheet.create({
 	container: {
 		flex:1,
-		justifyContent:'center',
-		alignItems:'center'
 	},
 	spinner:{
 		marginTop: height/2
@@ -127,5 +120,9 @@ const styles = StyleSheet.create({
 	spinnerText:{
 		color:"#03a9f4",
 		fontSize:16
+	},
+	error:{
+		justifyContent:'center',
+		alignItems:'center'
 	}
 });

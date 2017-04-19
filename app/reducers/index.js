@@ -4,7 +4,8 @@ import {
 	onLineNews,
 	OCGNews,
 	CardNews,
-	StrategyNews
+	StrategyNews,
+	VideoNews
 } from './OnLineNewsReducer'
 
 
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
 	onLineNews,
 	OCGNews,
 	CardNews,
-	StrategyNews
+	StrategyNews,
+	VideoNews
 });
 export default rootReducer;

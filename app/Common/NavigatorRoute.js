@@ -3,11 +3,14 @@ import
 {
     BackAndroid,
     Alert,
-	ToastAndroid
+	ToastAndroid,
+	Navigator
 } from 'react-native';
 
 import MainScene from '../Views/MainScene'
 import NewsDetail from '../Views/News/NewsDetail'
+import LoginView from '../Views/LoginView'
+import VideoDetail from '../Views/News/VideoDetail'
 
 export default class NavigatorRoute extends Component
 {
@@ -22,6 +25,22 @@ export default class NavigatorRoute extends Component
     	navigator.push({
     		component: NewsDetail,
 		    paramers: paramers
+	    })
+    }
+
+    static pushToLoginView(navigator)
+    {
+    	navigator.push({
+    		component: LoginView,
+		    sceneConfig: Navigator.SceneConfigs.FloatFromBottom,
+	    })
+    }
+
+    static pushToVideoScene(navigator,paramers)
+    {
+    	navigator.push({
+    		component: VideoDetail,
+		    category: paramers
 	    })
     }
 

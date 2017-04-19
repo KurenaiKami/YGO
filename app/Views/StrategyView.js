@@ -26,6 +26,7 @@ class StrategyView extends Component{
 	{
 		super(props);
 		this.dataSource = new ListView.DataSource({rowHasChanged: (r1,r2) => r1 !== r2 })
+		this.newslist = [];
 	}
 
 	componentDidMount()
@@ -35,30 +36,25 @@ class StrategyView extends Component{
 
 	render(){
 		const {StrategyNews } = this.props;
+		if (StrategyNews.newsList )
+		{
+			this.newslist = StrategyNews.newsList;
+		}
+		let loading = StrategyNews.loading == undefined ? true : StrategyNews.loading;
 
-		let listData = StrategyNews.newsList === undefined ? []: StrategyNews.newsList;
-		if (StrategyNews.state == 'card_fetch_ok')
-		{
-			return(
-				<ListView
-					enableEmptySections={true}
-					dataSource={this.dataSource.cloneWithRows(Array.from(listData))}
-					renderRow={this._renderRowItem.bind(this)}
-					refreshControl={
-			        <RefreshControl
-			            refreshing={StrategyNews.loading}
-			            onRefresh={this._refresh.bind(this)}
-			        />
-			    }
-				/>
-			)
-		}
-		else
-		{
-			return(
-				<View></View>
-			)
-		}
+		return(
+			<ListView
+				enableEmptySections={true}
+				dataSource={this.dataSource.cloneWithRows(Array.from(this.newslist))}
+				renderRow={this._renderRowItem.bind(this)}
+				refreshControl={
+		        <RefreshControl
+		            refreshing={loading}
+		            onRefresh={this._refresh.bind(this)}
+		        />
+		    }
+			/>
+		)
 
 
 	}
