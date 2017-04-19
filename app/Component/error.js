@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
 	container:{
 		justifyContent:'center',
 		alignItems: 'center',
-		paddingVertical: -Constants.window.width/2,
+		paddingVertical: Constants.window.width/2,
 	},
 	bg:{
 		padding: 15,
