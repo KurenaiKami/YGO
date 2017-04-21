@@ -8,7 +8,8 @@ import {
 	View,
 	Text,
 	ScrollView,
-	TouchableOpacity
+	TouchableOpacity,
+	InteractionManager
 } from 'react-native'
 
 import Constant from '../Common/Constants'
@@ -68,7 +69,9 @@ export default class MineView extends Component
 	}
 
 	_loginAction(){
-		NavigatorRoute.pushToLoginView(this.props.navigator);
+		InteractionManager.runAfterInteractions(()=>{
+			NavigatorRoute.pushToLoginView(this.props.navigator);
+		})
 	}
 }
 

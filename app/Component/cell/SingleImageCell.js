@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
 		marginLeft: Constants.window.margin,
 		borderBottomWidth: 0.5,
 		backgroundColor: 'white',
-		borderBottomColor: 'rgba(131, 131, 131, 0.7)'
+		borderBottomColor: 'rgba(131, 131, 131, 0.7)',
 	},
 	pvImage: {width: 15, height: 10},
 	newsSingleImage: {height: 70, width: 95},

@@ -10,7 +10,6 @@ import Splash from './Splash';
 
 import NavigatorRoute from '../Common/NavigatorRoute'
 
-import * as WeChat from 'react-native-wechat';
 
 var _navigator = null;
 export default class NavigatorRoot extends Component{
@@ -20,8 +19,6 @@ export default class NavigatorRoot extends Component{
 	}
 
 	componentDidMount(){
-		//WeChat.registerApp('1234567');
-		//WeChat.openWXApp();
 		if (!this.isIOS)
 		{
 			BackAndroid.addEventListener('hardwareBackPress',() => {
@@ -36,18 +33,28 @@ export default class NavigatorRoot extends Component{
 			BackAndroid.removeEventListener('hardwardBackPress');
 		}
 	}
+
+	_configureScene = route => {
+		if (route.sceneConfig) return route.sceneConfig
+
+		return {
+			...Navigator.SceneConfigs.HorizontalSwipeJumpFromRight,
+			gestures: {}    // 禁用左滑返回手势
+		}
+	}
+
     render(){
         return(
             <Navigator
                 style = {styles.nav}
-                configureScene={this.configureScene}
+                configureScene={this._configureScene}
                 renderScene={this._renderScene}
                 initialRoute={{
                     component:Splash
                 }}
             />
 
-    )
+        )
     }
 
     _renderScene(route,navigator)

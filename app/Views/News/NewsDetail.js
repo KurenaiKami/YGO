@@ -1,3 +1,6 @@
+/**
+ * Created by Administrator on 2017/4/20.
+ */
 import React,{Component} from 'react'
 import
 {
@@ -54,7 +57,6 @@ class NewsDetail extends Component
 					scrollEnabled={false}
 					scalesPageToFit={true}
 					javaScriptEnabled={true}
-
 					style={styles.webview}
 				/>
 
@@ -62,13 +64,14 @@ class NewsDetail extends Component
 					<AdMobBanner
 						bannerSize="banner"
 						adUnitID="ca-app-pub-2034229154215609/4962154175"
-						testDeviceID="EMULATOR"
-						didFailToReceiveAdWithError={this.bannerError} />
+						testDeviceID="EMULATOR"/>
 				</View>
+
 				<CommentToolbar
+					style={styles.toolBar}
 					comment = "1233"
 					commentAction = {this._commentAction}
-				    getCommentList = {this._getCommentList}
+					getCommentList = {this._getCommentList}
 				/>
 
 			</View>
@@ -104,9 +107,10 @@ const styles = StyleSheet.create({
 	},
 	banner:{
 		alignItems:'center',
+		marginBottom: 40,
 	},
 	webview:{
 		width: Constants.window.width,
 		height: Constants.window.height - Constants.window.navigation_height - 44
-	}
+	},
 })

@@ -45,6 +45,8 @@ export default class CommentToolbar extends Component {
 
 const styles = StyleSheet.create({
 	container:{
+		position:'absolute',
+		bottom: 0,
 		flexDirection: 'row',
 		height: 44,
 		width: Constant.window.width,

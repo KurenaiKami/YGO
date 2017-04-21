@@ -34,15 +34,12 @@ class News extends Component
 				tabBarTextStyle={{fontSize:14}}
 			>
 
-			<View tabLabel = '决斗链接'>
-				<DuelLinksNew navigator={this.props.navigator} route = {this.props.route}  />
-			</View>
-			<View tabLabel='游戏王OCG'>
-				<OCGNews navigator={this.props.navigator} route = {this.props.route} />
-			</View>
-			<View tabLabel='视频'>
-				<VideoView navigator={this.props.navigator} route = {this.props.route} />
-			</View>
+			<DuelLinksNew tabLabel = '决斗链接' navigator={this.props.navigator} route = {this.props.route}  />
+
+			<OCGNews  tabLabel='游戏王OCG' navigator={this.props.navigator} route = {this.props.route} />
+
+			<VideoView  tabLabel='视频' navigator={this.props.navigator} route = {this.props.route} />
+
 
 			</ScrollableTabView>
 		);

@@ -12,6 +12,7 @@ import {
 
 import Header from '../Component/Header'
 import NavigatorRoute from '../Common/NavigatorRoute'
+import * as WeChat from 'react-native-wechat';
 
 export default class LoginView extends Component{
 	accounts = [
@@ -19,6 +20,14 @@ export default class LoginView extends Component{
 		{name: '微信', icon: require('../Resources/Images/ic_account_wechat.png')},
 		{name: '微博', icon: require('../Resources/Images/ic_account_weibo.png')}
 	]
+
+	componentDidMount(){
+		try {
+			WeChat.registerApp('wxb24c445773822c79');//从微信开放平台申请
+		} catch (e) {
+			console.error(e);
+		}
+	}
 
 	render(){
 		return(
@@ -34,7 +43,7 @@ export default class LoginView extends Component{
 							return(
 								<TouchableOpacity
 									activeOpacity={0.75}
-								    onPress = {this.props.login}
+								    onPress = {this._login.bind(this)}
 								    key={i}
 								    style = {styles.accountItem}
 								>
@@ -52,6 +61,11 @@ export default class LoginView extends Component{
 		);
 	}
 
+	 _login(){
+		//WeChat.openWXApp();
+		let  authResult =  WeChat.sendAuthRequest("snsapi_userinfo");
+		console.log(authResult.errCode+"errorCode");
+	}
 	_touchAction()
 	{
 		NavigatorRoute.popBack(this.props.navigator);

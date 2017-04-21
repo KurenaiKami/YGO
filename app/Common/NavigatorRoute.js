@@ -32,7 +32,7 @@ export default class NavigatorRoute extends Component
     {
     	navigator.push({
     		component: LoginView,
-		    sceneConfig: Navigator.SceneConfigs.FloatFromBottom,
+		    sceneConfig: Navigator.SceneConfigs.FadeAndroid,
 	    })
     }
 

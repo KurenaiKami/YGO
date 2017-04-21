@@ -9,7 +9,8 @@ import {
 	Image,
 	View,
 	ListView,
-	RefreshControl
+	RefreshControl,
+	InteractionManager
 } from 'react-native';
 
 import VideoCell from '../../Component/cell/VideoCell'
@@ -63,7 +64,9 @@ class VideoView extends Component
 
 	_touchAction(category)
 	{
-		NavigatorRoute.pushToVideoScene(this.props.navigator,category);
+		InteractionManager.runAfterInteractions(() => {
+			NavigatorRoute.pushToVideoScene(this.props.navigator,category);
+		})
 	}
 
 	_refetch()

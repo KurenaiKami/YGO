@@ -58,10 +58,10 @@ class DuelLinksNew extends Component
 		}
 		let loading = onLineNews.loading == undefined? true : onLineNews.loading;
 		return(
-			<View>
+			<View style={styles.container}>
 				<ListView
-					style = {{height: Constants.window.height}}
 					enableEmptySections={true}
+					automaticallyAdjustContentInsets={false}
 					dataSource={this.dataSource.cloneWithRows(Array.from(this.newslist) )}
 					renderRow={this._renderListItemView.bind(this)}
 					refreshControl={
@@ -124,5 +124,9 @@ const styles = StyleSheet.create({
 	error:{
 		justifyContent:'center',
 		alignItems:'center'
+	},
+	listContainer:{
+		width: Constants.window.width,
+		height: Constants.window.height - 50
 	}
 });
