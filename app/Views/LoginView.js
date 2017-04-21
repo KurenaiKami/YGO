@@ -7,7 +7,8 @@ import {
 	Image,
 	View,
 	Text,
-	TouchableOpacity
+	TouchableOpacity,
+	ToastAndroid,
 } from 'react-native';
 
 import Header from '../Component/Header'
@@ -23,7 +24,7 @@ export default class LoginView extends Component{
 
 	componentDidMount(){
 		try {
-			WeChat.registerApp('wxb24c445773822c79');//从微信开放平台申请
+			WeChat.registerApp('wx8d560da3ba038e7e');//从微信开放平台申请
 		} catch (e) {
 			console.error(e);
 		}
@@ -63,8 +64,29 @@ export default class LoginView extends Component{
 
 	 _login(){
 		//WeChat.openWXApp();
-		let  authResult =  WeChat.sendAuthRequest("snsapi_userinfo");
-		console.log(authResult.errCode+"errorCode");
+		//  WeChat.isWXAppInstalled()
+		// 	 .then(function (isInstalled) {
+		// 		if (isInstalled)
+		// 		{
+		// 			WeChat.shareToSession({type: 'text',description:'test wechat'})
+		// 				.catch((error) => {
+		// 					console.log("share error" + error);
+		// 				})
+		// 		}
+		// 		else
+		// 		{
+		// 			ToastAndroid.show('没有安装微信软件，请您安装微信之后再试', ToastAndroid.SHORT);
+		// 		}
+		//
+		// 	 })
+
+		 WeChat.sendAuthRequest()
+			 .then((response) => {
+		 	    console.log("******************")
+			 })
+			 .catch((error) => {
+
+			 })
 	}
 	_touchAction()
 	{
