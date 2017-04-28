@@ -53,6 +53,7 @@
 		C407EF351271438289F70F58 /* libRCTWeiboAPI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8D324B5E452D4A23B13AD033 /* libRCTWeiboAPI.a */; };
 		FA9E831193BE488C91F37691 /* libRCTVideo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 39202A6A223A46DCB966DFAD /* libRCTVideo.a */; };
 		8143043936444E57961840E7 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7DA45F82983646AC861EBA1D /* libRNDeviceInfo.a */; };
+		3C63AA0B316242F3AB0D03A9 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F59A23CD8E5342F78F0C5D8B /* libRCTActionSheet.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -298,6 +299,8 @@
 		39202A6A223A46DCB966DFAD /* libRCTVideo.a */ = {isa = PBXFileReference; name = "libRCTVideo.a"; path = "libRCTVideo.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		0F62F4C22C154B23B49AE616 /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; name = "RNDeviceInfo.xcodeproj"; path = "../node_modules/react-native-device-info/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		7DA45F82983646AC861EBA1D /* libRNDeviceInfo.a */ = {isa = PBXFileReference; name = "libRNDeviceInfo.a"; path = "libRNDeviceInfo.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		014868AA852D4ADBBD0EA43D /* Demo.xcodeproj */ = {isa = PBXFileReference; name = "Demo.xcodeproj"; path = "../node_modules/react-native-social-kit/ShareSDKDemo/ios/Demo.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		F59A23CD8E5342F78F0C5D8B /* libRCTActionSheet.a */ = {isa = PBXFileReference; name = "libRCTActionSheet.a"; path = "libRCTActionSheet.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -332,6 +335,7 @@
 				C407EF351271438289F70F58 /* libRCTWeiboAPI.a in Frameworks */,
 				FA9E831193BE488C91F37691 /* libRCTVideo.a in Frameworks */,
 				8143043936444E57961840E7 /* libRNDeviceInfo.a in Frameworks */,
+				3C63AA0B316242F3AB0D03A9 /* libRCTActionSheet.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -506,6 +510,7 @@
 				69D6589BA96744E7BBAFEE1A /* RCTWeiboAPI.xcodeproj */,
 				5824662084EC4B32A6C7D6B9 /* RCTVideo.xcodeproj */,
 				0F62F4C22C154B23B49AE616 /* RNDeviceInfo.xcodeproj */,
+				014868AA852D4ADBBD0EA43D /* Demo.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1070,6 +1075,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1081,6 +1087,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-weibo\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-video\ios",
 					"$(SRCROOT)\..\node_modules\react-native-device-info\RNDeviceInfo",
+					"$(SRCROOT)\..\node_modules\react-native-social-kit\ios/**",
 				);
 			};
 			name = Debug;
@@ -1109,6 +1116,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1120,6 +1128,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-weibo\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-video\ios",
 					"$(SRCROOT)\..\node_modules\react-native-device-info\RNDeviceInfo",
+					"$(SRCROOT)\..\node_modules\react-native-social-kit\ios/**",
 				);
 			};
 			name = Release;
@@ -1149,6 +1158,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-weibo\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-video\ios",
 					"$(SRCROOT)\..\node_modules\react-native-device-info\RNDeviceInfo",
+					"$(SRCROOT)\..\node_modules\react-native-social-kit\ios/**",
 				);
 			};
 			name = Debug;
@@ -1177,6 +1187,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-weibo\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-video\ios",
 					"$(SRCROOT)\..\node_modules\react-native-device-info\RNDeviceInfo",
+					"$(SRCROOT)\..\node_modules\react-native-social-kit\ios/**",
 				);
 			};
 			name = Release;
@@ -1214,6 +1225,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1225,6 +1237,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-weibo\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-video\ios",
 					"$(SRCROOT)\..\node_modules\react-native-device-info\RNDeviceInfo",
+					"$(SRCROOT)\..\node_modules\react-native-social-kit\ios/**",
 				);
 			};
 			name = Debug;
@@ -1262,6 +1275,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1273,6 +1287,7 @@
 					"$(SRCROOT)\..\node_modules\react-native-weibo\ios/**",
 					"$(SRCROOT)\..\node_modules\react-native-video\ios",
 					"$(SRCROOT)\..\node_modules\react-native-device-info\RNDeviceInfo",
+					"$(SRCROOT)\..\node_modules\react-native-social-kit\ios/**",
 				);
 			};
 			name = Release;
@@ -1305,6 +1320,7 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 			};
 			name = Debug;
@@ -1329,6 +1345,7 @@
 				TVOS_DEPLOYMENT_TARGET = 10.1;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",

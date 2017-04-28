@@ -12,6 +12,8 @@ import NewsDetail from '../Views/News/NewsDetail'
 import LoginView from '../Views/LoginView'
 import VideoDetail from '../Views/News/VideoDetail'
 
+import WeiboPage from '../Views/Logins/WeiboPage'
+
 export default class NavigatorRoute extends Component
 {
     static replaceToMainScene(navigator){
@@ -41,6 +43,13 @@ export default class NavigatorRoute extends Component
     	navigator.push({
     		component: VideoDetail,
 		    category: paramers
+	    })
+    }
+
+    static pushToWeiboAuthPage(navigator)
+    {
+    	navigator.push({
+    		component: WeiboPage,
 	    })
     }
 

@@ -14,6 +14,7 @@
     "react-native-fs": "^2.1.0-rc.1",
     "react-native-gifted-listview": "0.0.15",
     "react-native-scrollable-tab-view": "^0.6.0",
+    "react-native-social-kit": "0.0.9",
     "react-native-spinkit": "^1.0.2",
     "react-native-swiper": "^1.5.4",
     "react-native-tab-navigator": "^0.3.3",
@@ -22,7 +23,8 @@
     "react-native-wechat": "^1.9.2",
     "react-redux": "^5.0.3",
     "redux": "^3.6.0",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "url": "^0.11.0"
   },
   "devDependencies": {
     "babel-jest": "19.0.0",

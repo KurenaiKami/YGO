@@ -9,11 +9,13 @@ import {
 	Text,
 	TouchableOpacity,
 	ToastAndroid,
+	WebView
 } from 'react-native';
 
 import Header from '../Component/Header'
 import NavigatorRoute from '../Common/NavigatorRoute'
 import * as WeChat from 'react-native-wechat';
+
 
 export default class LoginView extends Component{
 	accounts = [
@@ -22,12 +24,18 @@ export default class LoginView extends Component{
 		{name: '微博', icon: require('../Resources/Images/ic_account_weibo.png')}
 	]
 
+	constructor(props)
+	{
+		super(props);
+
+	}
+
 	componentDidMount(){
-		try {
-			WeChat.registerApp('wx8d560da3ba038e7e');//从微信开放平台申请
-		} catch (e) {
-			console.error(e);
-		}
+		// try {
+		// 	WeChat.registerApp('wxf31799d7d43bc4cb');//从微信开放平台申请
+		// } catch (e) {
+		// 	console.error(e);
+		// }
 	}
 
 	render(){
@@ -63,30 +71,30 @@ export default class LoginView extends Component{
 	}
 
 	 _login(){
-		//WeChat.openWXApp();
-		//  WeChat.isWXAppInstalled()
-		// 	 .then(function (isInstalled) {
-		// 		if (isInstalled)
-		// 		{
-		// 			WeChat.shareToSession({type: 'text',description:'test wechat'})
-		// 				.catch((error) => {
-		// 					console.log("share error" + error);
-		// 				})
-		// 		}
-		// 		else
-		// 		{
-		// 			ToastAndroid.show('没有安装微信软件，请您安装微信之后再试', ToastAndroid.SHORT);
-		// 		}
-		//
-		// 	 })
+		NavigatorRoute.pushToWeiboAuthPage(this.props.navigator);
+		 // WeChat.isWXAppInstalled()
+			//  .then(function (isInstalled) {
+			// 	if (isInstalled)
+			// 	{
+			// 		WeChat.shareToSession({type: 'text',description:'test wechat'})
+			// 			.catch((error) => {
+			// 				console.log("share error" + error);
+			// 			})
+			// 	}
+			// 	else
+			// 	{
+			// 		ToastAndroid.show('没有安装微信软件，请您安装微信之后再试', ToastAndroid.SHORT);
+			// 	}
+		 //
+			//  })
 
-		 WeChat.sendAuthRequest()
-			 .then((response) => {
-		 	    console.log("******************")
-			 })
-			 .catch((error) => {
-
-			 })
+		 // WeChat.sendAuthRequest()
+			//  .then((response) => {
+		 // 	    console.log("******************")
+			//  })
+			//  .catch((error) => {
+		 //
+			//  })
 	}
 	_touchAction()
 	{
