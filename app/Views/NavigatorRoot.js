@@ -10,6 +10,8 @@ import Splash from './Splash';
 
 import NavigatorRoute from '../Common/NavigatorRoute'
 
+import StorageUtils from '../utils/StorageUtils'
+
 
 var _navigator = null;
 export default class NavigatorRoot extends Component{
@@ -19,6 +21,7 @@ export default class NavigatorRoot extends Component{
 	}
 
 	componentDidMount(){
+		StorageUtils.initStorage();
 		if (!this.isIOS)
 		{
 			BackAndroid.addEventListener('hardwareBackPress',() => {

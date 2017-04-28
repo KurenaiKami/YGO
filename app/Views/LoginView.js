@@ -16,10 +16,11 @@ import Header from '../Component/Header'
 import NavigatorRoute from '../Common/NavigatorRoute'
 import * as WeChat from 'react-native-wechat';
 
+import StorageUtils from '../utils/StorageUtils'
+
 
 export default class LoginView extends Component{
 	accounts = [
-		{name: 'QQ', icon: require('../Resources/Images/ic_account_qq.png')},
 		{name: '微信', icon: require('../Resources/Images/ic_account_wechat.png')},
 		{name: '微博', icon: require('../Resources/Images/ic_account_weibo.png')}
 	]
@@ -31,11 +32,22 @@ export default class LoginView extends Component{
 	}
 
 	componentDidMount(){
-		// try {
-		// 	WeChat.registerApp('wxf31799d7d43bc4cb');//从微信开放平台申请
-		// } catch (e) {
-		// 	console.error(e);
-		// }
+		try {
+			WeChat.registerApp('wxe05e677dbcfe0d63');//从微信开放平台申请
+		} catch (e) {
+			console.error(e);
+		}
+
+
+		let savedata = {
+			type: "weixin",
+			username: "name",
+			token: "token",
+			headimage: "image",
+			sex: "1",
+		};
+		StorageUtils.saveLoginState(savedata);
+
 	}
 
 	render(){
@@ -71,7 +83,7 @@ export default class LoginView extends Component{
 	}
 
 	 _login(){
-		NavigatorRoute.pushToWeiboAuthPage(this.props.navigator);
+		//NavigatorRoute.pushToWeiboAuthPage(this.props.navigator);
 		 // WeChat.isWXAppInstalled()
 			//  .then(function (isInstalled) {
 			// 	if (isInstalled)
@@ -88,13 +100,23 @@ export default class LoginView extends Component{
 		 //
 			//  })
 
-		 // WeChat.sendAuthRequest()
-			//  .then((response) => {
-		 // 	    console.log("******************")
-			//  })
-			//  .catch((error) => {
-		 //
-			//  })
+		 WeChat.sendAuthRequest("snsapi_userinfo")
+			 .then((response) => {
+		 	    response.json();
+			 })
+			 .then(function (responseData) {
+				 let savedata = {
+					 type: "weixin",
+					 username: "name",
+					 token: "token",
+					 headimage: "image",
+					 sex: "1",
+				 };
+				 StorageUtils.saveLoginState(savedata);
+			 })
+			 .catch((error) => {
+
+			 })
 	}
 	_touchAction()
 	{
@@ -107,7 +129,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 	},
 	accountWrapper:{
-		flexDirection:'row',
+		flexDirection:'column',
 		paddingHorizontal:20,
 		paddingTop: 15,
 		paddingBottom: 30,

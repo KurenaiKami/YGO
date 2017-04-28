@@ -16,17 +16,38 @@ import Constant from '../Common/Constants'
 
 import NavigatorRoute from '../Common/NavigatorRoute'
 
+import StorageUtils from '../utils/StorageUtils';
+
 export default class MineView extends Component
 {
 	constructor(props)
 	{
 		super(props);
+		this.state = {
+			islogin: false
+		}
 	}
+
+	componentDidMount(){
+		StorageUtils.isLogin()
+			.then(islogin => {
+				if (islogin)
+				{
+					this.setState({
+						islogin: true
+					})
+					console.log("login...........true" );
+				}
+			}).catch(err=>{
+				console.log("login..........." + err);
+		})
+	}
+
 	render()
 	{
 		return(
 			<View style={styles.container}>
-				<HeaderView settingAction={this._settingAction} loginAction = {this._loginAction.bind(this)} />
+				<HeaderView settingAction={this._settingAction} loginAction = {this._loginAction.bind(this)}  islogin = {this.state.islogin} />
 				<View style={styles.cellContainer}>
 					<ProfileStaticCell
 						title="我的收藏"
@@ -76,7 +97,7 @@ export default class MineView extends Component
 }
 
 
-const HeaderView = ({settingAction,loginAction}) => {
+const HeaderView = ({settingAction,loginAction,islogin}) => {
 	return(
 		<Image
 			style={styles.headerImage}
@@ -103,14 +124,14 @@ const HeaderView = ({settingAction,loginAction}) => {
 						source={require("../Resources/Images/img_default_avatar.png")}
 					/>
 				</View>
-
+				{islogin ? null :
 				<TouchableOpacity
 					activeOpacity={0.74}
 					onPress = {loginAction}
 					style={styles.loginContainer}
 				>
 					<Text style={styles.loginText}>点击登录</Text>
-				</TouchableOpacity>
+				</TouchableOpacity>}
 
 			</View>
 		</Image>

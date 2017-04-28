@@ -16,6 +16,7 @@
     "react-native-scrollable-tab-view": "^0.6.0",
     "react-native-social-kit": "0.0.9",
     "react-native-spinkit": "^1.0.2",
+    "react-native-storage": "^0.1.5",
     "react-native-swiper": "^1.5.4",
     "react-native-tab-navigator": "^0.3.3",
     "react-native-vector-icons": "^4.0.0",
