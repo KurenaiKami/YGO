@@ -35,11 +35,10 @@ export default class MineView extends Component
 		StorageUtils.getLoginState()
 			.then(data => {
 				loginData = data;
-				this.state={
+				this.setState({
 					refresh: true
-				}
-				ToastAndroid.show("country=="+ loginData.country,ToastAndroid.SHORT);
-				ToastAndroid.show("headimgurl=="+ loginData.headimgurl,ToastAndroid.SHORT);
+				})
+				ToastAndroid.show("nickname=="+ loginData.nickname,ToastAndroid.SHORT);
 			})
 			.catch(err => {
 				loginData = null;
