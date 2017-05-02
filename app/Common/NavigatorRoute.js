@@ -30,11 +30,12 @@ export default class NavigatorRoute extends Component
 	    })
     }
 
-    static pushToLoginView(navigator)
+    static pushToLoginView(navigator,callback)
     {
     	navigator.push({
     		component: LoginView,
 		    sceneConfig: Navigator.SceneConfigs.FadeAndroid,
+		    paramers: callback
 	    })
     }
 

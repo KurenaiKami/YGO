@@ -6,7 +6,8 @@ import {
 } from 'react-native'
 import Storage from 'react-native-storage';
 import {
-	STORAGE_KEY_LOGIN
+	STORAGE_KEY_LOGIN,
+	STORAGE_WECAHT_AUTH
 } from '../Common/Constants'
 
 var storage;
@@ -38,6 +39,8 @@ export default class StorageUtils extends Component{
 			}
 		})
 	}
+
+
 	//保存登录信息
 	static saveLoginState(info)
 	{
@@ -46,11 +49,9 @@ export default class StorageUtils extends Component{
 			storage.save({
 				key: STORAGE_KEY_LOGIN,
 				rawData:{
-					type: info.apptype,
-					username: info.username,
-					token: info.token,
-					headimage: info.user_headimage,
-					sex: info.usersex,
+					type: info.type,
+					nickname: info.nickname,
+					headimgurl: info.headimgurl,
 				}
 			})
 		}

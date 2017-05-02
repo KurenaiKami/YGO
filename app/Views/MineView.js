@@ -9,7 +9,8 @@ import {
 	Text,
 	ScrollView,
 	TouchableOpacity,
-	InteractionManager
+	InteractionManager,
+	ToastAndroid
 } from 'react-native'
 
 import Constant from '../Common/Constants'
@@ -18,29 +19,32 @@ import NavigatorRoute from '../Common/NavigatorRoute'
 
 import StorageUtils from '../utils/StorageUtils';
 
+var loginData = null;
+
 export default class MineView extends Component
 {
 	constructor(props)
 	{
 		super(props);
-		this.state = {
-			islogin: false
+		this.state={
+			refresh: false
 		}
 	}
 
 	componentDidMount(){
-		StorageUtils.isLogin()
-			.then(islogin => {
-				if (islogin)
-				{
-					this.setState({
-						islogin: true
-					})
-					console.log("login...........true" );
+		StorageUtils.getLoginState()
+			.then(data => {
+				loginData = data;
+				this.state={
+					refresh: true
 				}
-			}).catch(err=>{
-				console.log("login..........." + err);
-		})
+				ToastAndroid.show("country=="+ loginData.country,ToastAndroid.SHORT);
+				ToastAndroid.show("headimgurl=="+ loginData.headimgurl,ToastAndroid.SHORT);
+			})
+			.catch(err => {
+				loginData = null;
+			})
+
 	}
 
 	render()
@@ -90,9 +94,20 @@ export default class MineView extends Component
 	}
 
 	_loginAction(){
-		InteractionManager.runAfterInteractions(()=>{
-			NavigatorRoute.pushToLoginView(this.props.navigator);
+
+		NavigatorRoute.pushToLoginView(this.props.navigator,this._authoCallback.bind(this));
+
+	}
+
+	_authoCallback(result){
+		this.setState({
+			refresh: result
 		})
+
+		if (result)
+		{
+			NavigatorRoute.popBack(this.props.navigator);
+		}
 	}
 }
 
@@ -119,12 +134,19 @@ const HeaderView = ({settingAction,loginAction,islogin}) => {
 
 			<View style={styles.imageHeader}>
 				<View style={styles.avatarContainer}>
-					<Image
-						style={{width: 80,height:80}}
-						source={require("../Resources/Images/img_default_avatar.png")}
-					/>
+					{
+						loginData !== null ?
+							<Image
+								style={{width: 80,height:80}}
+								source={{uri: loginData.headimgurl}}
+							/> :
+							<Image
+								style={{width: 80,height:80}}
+								source={require("../Resources/Images/img_default_avatar.png")}
+							/>
+					}
 				</View>
-				{islogin ? null :
+				{loginData !== null ? null :
 				<TouchableOpacity
 					activeOpacity={0.74}
 					onPress = {loginAction}

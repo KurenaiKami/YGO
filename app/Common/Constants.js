@@ -31,6 +31,9 @@ export const URL_NEWS_DETAIL= URL + '/news?key=';
 
 export const STORAGE_KEY_LOGIN = "loginState";
 
+
+export const STORAGE_WECAHT_AUTH = "wechatauth";
+
 //在线新闻
 //export const APP_KEY_ONLINE_NEWS = '56ea19cddad7e896b6e90d5d4cde3628';
 //export const URL_ONLINE_NEWS = 'http://api.tianapi.com/wxnew/';
