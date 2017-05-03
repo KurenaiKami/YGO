@@ -1,14 +1,18 @@
 import * as types from '../actions/ActionTypes'
 
-const state = {
-	state:'pre_login'
-}
-
-export function login(state=[],action) {
+export function loginReducer(state=[],action) {
 	switch (action.type)
 	{
-		case types.ACTION_FETCH_LOGIN:
-			return Object.assign({},state);
+		case types.ACTION_LOGIN_FETCH_OK:
+			return {
+				loginData: action.loginData
+			};
+			break
+		case types.ACTION_LOGIN_FETCH_ERROR:
+				return{
+					loginData: null
+				}
+			break;
 		default:
 			return state;
 	}

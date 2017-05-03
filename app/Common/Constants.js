@@ -31,8 +31,14 @@ export const URL_NEWS_DETAIL= URL + '/news?key=';
 
 export const STORAGE_KEY_LOGIN = "loginState";
 
-
 export const STORAGE_WECAHT_AUTH = "wechatauth";
+
+export const WECHAT_APPID = "wxe05e677dbcfe0d63";
+export const WECHAT_SECRECT="fa86b6b518eabee2b3465e2292e5ec36";
+export const WECHAT_FETCH_URL = "https://api.weixin.qq.com/sns/"
+
+export const WEIBO_APPID = "404581112";
+export const WEIBO_SECRECT = "aa44130ebf0dd00e2f554ad57d15b75f";
 
 //在线新闻
 //export const APP_KEY_ONLINE_NEWS = '56ea19cddad7e896b6e90d5d4cde3628';

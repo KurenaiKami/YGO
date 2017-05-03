@@ -18,9 +18,17 @@ import * as WeChat from 'react-native-wechat';
 
 import StorageUtils from '../utils/StorageUtils'
 
-var loginCallback = null;
+import {
+	WECHAT_APPID,
+	WECHAT_SECRECT,
+	WECHAT_FETCH_URL
+} from '../Common/Constants'
 
-export default class LoginView extends Component{
+import * as types from '../actions/ActionTypes'
+
+import {connect} from 'react-redux';
+
+class LoginView extends Component{
 	accounts = [
 		{name: '微信', icon: require('../Resources/Images/ic_account_wechat.png'),key:'wechat'},
 		{name: '微博', icon: require('../Resources/Images/ic_account_weibo.png'),key:'weibo'}
@@ -36,18 +44,8 @@ export default class LoginView extends Component{
 		}
 	}
 
-	componentDidMount(){
-		try {
-			WeChat.registerApp('wxe05e677dbcfe0d63');//从微信开放平台申请
-		} catch (e) {
-			console.error(e);
-		}
-	}
-
 	render(){
 		const {route} = this.props;
-		loginCallback = route.paramers;
-
 		return(
 			<View style={styles.container}>
 				<Header
@@ -74,23 +72,7 @@ export default class LoginView extends Component{
 	}
 
 	 _login(key) {
-		 //NavigatorRoute.pushToWeiboAuthPage(this.props.navigator);
-		 // WeChat.isWXAppInstalled()
-		 //  .then(function (isInstalled) {
-		 // 	if (isInstalled)
-		 // 	{
-		 // 		WeChat.shareToSession({type: 'text',description:'test wechat'})
-		 // 			.catch((error) => {
-		 // 				console.log("share error" + error);
-		 // 			})
-		 // 	}
-		 // 	else
-		 // 	{
-		 // 		ToastAndroid.show('没有安装微信软件，请您安装微信之后再试', ToastAndroid.SHORT);
-		 // 	}
-		 //
-		 //  })
-
+		const {dispatch} = this.props;
 		 if (key == "wechat")
 		 {
 			 WeChat.sendAuthRequest("snsapi_userinfo","wechat_sdk_demo")
@@ -99,46 +81,44 @@ export default class LoginView extends Component{
 						 wechatCode: res.code
 					 })
 
-					 ToastAndroid.show("code=="+ this.state.wechatCode,ToastAndroid.SHORT);
-
 					 this.getWechatAccessToken()
 						 .then(res => {
 							this.setState({
 								wechatAccessToken: res.access_token,
 								wechatOpenId: res.openid
 							})
-
-						    ToastAndroid.show("wechatAccessToken=="+ this.state.wechatAccessToken,ToastAndroid.SHORT);
-
 							this.getWechatUserInfo()
 								.then(res =>{
-									StorageUtils.saveLoginState({
+									let data = {
 										type: 'wechat',
 										nickname: res.nickname,
 										headimgurl: res.headimgurl,
-										country: res.country,
+									}
+									StorageUtils.saveLoginState(data);
+									dispatch({
+										type: types.ACTION_LOGIN_FETCH_OK,
+										loginData: data
 									})
-									loginCallback(true);
 
-									ToastAndroid.show("nickname=="+ res.nickname,ToastAndroid.SHORT);
-									ToastAndroid.show("headimgurl=="+ res.headimgurl,ToastAndroid.SHORT);
+									NavigatorRoute.popBack(this.props.navigator);
 								})
-
 						 })
 						 .catch(err => {
-
-							 loginCallback(false);
+							 dispatch({
+								 type: types.ACTION_LOGIN_FETCH_ERROR
+							 })
 							 ToastAndroid.show("error",ToastAndroid.SHORT);
 						 })
 
 				 })
 				 .catch((error) => {
-				    loginCallback(false);
-
+					 dispatch({
+						 type: types.ACTION_LOGIN_FETCH_ERROR
+					 })
 					 ToastAndroid.show("error",ToastAndroid.SHORT);
 				 })
-
 		 }
+
 		 else
 		 {
 			 NavigatorRoute.pushToWeiboAuthPage(this.props.navigator);
@@ -153,9 +133,18 @@ export default class LoginView extends Component{
 	//wechat auth
 	getWechatAccessToken()
 	{
+		var OAUTH_URL = [
+			WECHAT_FETCH_URL,
+			'oauth2/access_token?appid=',
+			WECHAT_APPID,
+			'&secret=',
+			WECHAT_SECRECT,
+			'&code=',
+			this.state.wechatCode,
+			"&grant_type=authorization_code"
+		].join('');
 		return new Promise((resolve,reject) => {
-			fetch("https://api.weixin.qq.com/sns/oauth2/access_token?appid=wxe05e677dbcfe0d63&secret=fa86b6b518eabee2b3465e2292e5ec36&code="
-				+ this.state.wechatCode + "&grant_type=authorization_code")
+			fetch(OAUTH_URL)
 				.then((response) => {
 					return response.json();
 				})
@@ -170,8 +159,16 @@ export default class LoginView extends Component{
 
 	getWechatUserInfo()
 	{
+		var OAUTH_URL = [
+			WECHAT_FETCH_URL,
+			'userinfo?access_token=',
+			this.state.wechatAccessToken,
+			'&openid=',
+			this.state.wechatOpenId
+		].join('');
+
 		return new Promise((resolve,reject) => {
-			fetch("https://api.weixin.qq.com/sns/userinfo?access_token=" + this.state.wechatAccessToken + "&openid=" + this.state.wechatOpenId)
+			fetch(OAUTH_URL)
 				.then(response => {
 					return response.json();
 				})
@@ -209,6 +206,12 @@ const LoginCell = ({title,imageName,onPress}) => {
 		</TouchableOpacity>
 	)
 }
+
+function mapStateToProps(state) {
+	return state;
+}
+
+export default connect(mapStateToProps)(LoginView);
 
 
 const styles = StyleSheet.create({

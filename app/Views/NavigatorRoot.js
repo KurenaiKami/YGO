@@ -12,6 +12,11 @@ import NavigatorRoute from '../Common/NavigatorRoute'
 
 import StorageUtils from '../utils/StorageUtils'
 
+import * as WeChat from 'react-native-wechat';
+
+import {
+	WECHAT_APPID
+} from '../Common/Constants'
 
 var _navigator = null;
 export default class NavigatorRoot extends Component{
@@ -27,6 +32,12 @@ export default class NavigatorRoot extends Component{
 			BackAndroid.addEventListener('hardwareBackPress',() => {
 				return NavigatorRoute.popBack(_navigator);
 			})
+		}
+
+		try {
+			WeChat.registerApp(WECHAT_APPID);//从微信开放平台申请
+		} catch (e) {
+			console.error(e);
 		}
 	}
 

@@ -13,44 +13,51 @@ import {
 	ToastAndroid
 } from 'react-native'
 
+import * as types from '../actions/ActionTypes';
+
+
 import Constant from '../Common/Constants'
 
 import NavigatorRoute from '../Common/NavigatorRoute'
 
 import StorageUtils from '../utils/StorageUtils';
 
+import {connect} from 'react-redux'
+
 var loginData = null;
 
-export default class MineView extends Component
+class MineView extends Component
 {
 	constructor(props)
 	{
 		super(props);
-		this.state={
-			refresh: false
-		}
 	}
 
 	componentDidMount(){
+		const {dispatch} = this.props;
 		StorageUtils.getLoginState()
 			.then(data => {
-				loginData = data;
-				this.setState({
-					refresh: true
+				dispatch({
+					type: types.ACTION_LOGIN_FETCH_OK,
+					loginData: data
 				})
-				ToastAndroid.show("nickname=="+ loginData.nickname,ToastAndroid.SHORT);
 			})
 			.catch(err => {
-				loginData = null;
-			})
+				dispatch({
+					type: types.ACTION_LOGIN_FETCH_ERROR,
+				})
 
+			})
 	}
 
 	render()
 	{
+		const {loginReducer} = this.props;
+	    loginData =	loginReducer.loginData == undefined ? null : loginReducer.loginData;
+
 		return(
 			<View style={styles.container}>
-				<HeaderView settingAction={this._settingAction} loginAction = {this._loginAction.bind(this)}  islogin = {this.state.islogin} />
+				<HeaderView settingAction={this._settingAction} loginAction = {this._loginAction.bind(this)}   />
 				<View style={styles.cellContainer}>
 					<ProfileStaticCell
 						title="我的收藏"
@@ -93,25 +100,13 @@ export default class MineView extends Component
 	}
 
 	_loginAction(){
-
-		NavigatorRoute.pushToLoginView(this.props.navigator,this._authoCallback.bind(this));
-
+		NavigatorRoute.pushToLoginView(this.props.navigator);
 	}
 
-	_authoCallback(result){
-		this.setState({
-			refresh: result
-		})
-
-		if (result)
-		{
-			NavigatorRoute.popBack(this.props.navigator);
-		}
-	}
 }
 
 
-const HeaderView = ({settingAction,loginAction,islogin}) => {
+const HeaderView = ({settingAction,loginAction}) => {
 	return(
 		<Image
 			style={styles.headerImage}
@@ -136,7 +131,7 @@ const HeaderView = ({settingAction,loginAction,islogin}) => {
 					{
 						loginData !== null ?
 							<Image
-								style={{width: 80,height:80}}
+								style={{width: 80,height:80,borderRadius: 45,}}
 								source={{uri: loginData.headimgurl}}
 							/> :
 							<Image
@@ -145,7 +140,7 @@ const HeaderView = ({settingAction,loginAction,islogin}) => {
 							/>
 					}
 				</View>
-				{loginData !== null ? null :
+				{loginData !== null ? <Text style={styles.loginText}>{loginData.nickname}</Text> :
 				<TouchableOpacity
 					activeOpacity={0.74}
 					onPress = {loginAction}
@@ -181,6 +176,12 @@ const ProfileStaticCell = ({title,imageName,style,onPress}) => {
 		</TouchableOpacity>
 	)
 }
+
+function mapStateToProps(state) {
+	return state;
+}
+
+export default connect(mapStateToProps)(MineView);
 
 const styles = StyleSheet.create({
 	container:{
